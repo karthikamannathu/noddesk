@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>noddesk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+      max-width: 1500vh;
+     padding: 0%;
+    }
+
+    li {
+      list-style: none;
+    }
+   :root{
+    ---font-service-banner:  "Nunito", sans-serif;
+     ---service-font:"Saira", sans-serif;
+     --plans-font: "Montserrat", sans-serif;
+      ---price-card: "Rubik", sans-serif;
+     --font-color: #7e8b9a;
+   }
+
+    @media only screen and (max-width: 1550px) {
+      .home-page {
+       
+      
+        overflow: hidden;
+      
+      }
+
+      .navbar {
+        margin-right: 20%;
+        display: flex;
+        flex-direction: row;
+        height: 50px;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "Nunito", sans-serif;
+        font-size: small;
+        font-weight: 600;
+        font-style: normal;
+        color: rgb(170, 174, 174);
+        box-shadow: 0 2px 1px rgba(224, 225, 225, 0.5);
+      }
+
+      .item1>ol {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        gap: 5pc;
+      }
+
+      .item2>ol {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+        justify-items: center;
+      }
+
+      .btn {
+        background-image: linear-gradient(to right, #0b2bfd, #2abeeb);
+        text-align: center;
+        width: 180px;
+        height: 50px;
+        border-radius: 30px;
+        align-content: center;
+        color: bisque;
+      }
+
+      .banner-first {
+        height: 850px;
+        overflow: hidden;
+        top: 5%;
+      }
+
+      .hero-right-bg {
+        justify-content: right;
+        object-fit: contain;
+        height: 900px;
+        width: 500px;
+        position: absolute;
+        right: 20px;
+      }
+
+      .hero-right-bg>img {
+        width: 100%;
+      }
+
+      .hero-img {
+        position: absolute;
+        overflow: hidden;
+        height: 800px;
+        width: 650px;
+        object-fit: cover;
+        right: 50%;
+        left: 50%;
+        top: 30%;
+        bottom: 10%;
+      }
+
+      .hero-img>img {
+        width: 100%;
+      }
+
+      .hero-left-bg>img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero-left-bg {
+        position: absolute;
+        top: 20%;
+        bottom: 20%;
+        height: 700px;
+        width: 500px;
+      }
+
+      .banner-container {
+        position: absolute;
+        margin-left: 26%;
+        height: 300px;
+        width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow: hidden;
+        top: 30%;
+      }
+
+      .welcome-lebal {
+        border-radius: 30px;
+        padding: 15px;
+        width: 230px;
+        border: 1px solid #e3e9f2;
+        border-style: solid;
+        text-align: center;
+        color: #7e8b9a;
+      }
+
+      .text-container {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 200;
+        font-style: normal;
+        font-size: 60px;
+        word-spacing: 0px;
+      }
+
+      .hero-bottom-left-dot {}
+
+      .hero-top-center-dot {
+        position: absolute;
+        right: 20%;
+      }
+
+      .hero-bottom-left-dot {
+        position: absolute;
+        left: 35%;
+        bottom: 10%;
+      }
+
+      .aboutUs-container {
+        height: 800px;
+        width: 100%;
+        overflow: hidden;
+        margin-top: 10%;
+      }
+
+      .about-box {
+        position: absolute;
+        left: 20%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .about-label {
+        font-family: "Nunito", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        color: rgb(170, 174, 174);
+        text-align: center;
+      }
+
+      .text-container-about {
+        font-family: "Nunito", sans-serif;
+        font-weight: 200;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        word-spacing: 0px;
+        text-align: center;
+      }
+
+      .about-banner {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin-top: 50px;
+      }
+
+      .about-banner-img {
+        width: 800px;
+        height: 600px;
+      }
+
+      .divider {
+        width: 130px;
+        height: 5px;
+        background-color: rgb(91, 169, 236);
+        border-radius: 2px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+
+      .about-plate>img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .about-plate {
+        position: absolute;
+        left: 10%;
+        top: 90%;
+        width: 180px;
+        height: 180px;
+      }
+
+      .about-left-banner {
+        position: absolute;
+        transform: translatey(100%);
+        width: 650px;
+        top: 1200px;
+      }
+
+      .about-left-banner>img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .about-right-bg {
+        position: absolute;
+        top: 1000px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 500px;
+        height: 500px;
+      }
+
+      .card-container {
+        display: flex;
+        gap: 60px;
+        max-width: 1200px;
+        margin-top: 250px;
+        margin-left: 200px;
+        position: absolute;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        gap: 40px;
+      }
+
+      .column.right {
+        margin-top: 70px;
+      }
+
+      .cards {
+        background: white;
+        border-radius: 16px;
+        padding: 30px 24px;
+        width: 260px;
+        height: 350px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        font-family: var(---font-service-banner);
+
+      }
+
+      .icon {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: white;
+        font-size: 26px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .blue {
+        background: linear-gradient(to right, #3b82f6, #2563eb);
+      }
+
+      .green {
+        background: linear-gradient(to left, #34d399, #059669);
+      }
+
+      .orange {
+        background: linear-gradient(to right, #fb923c, #f97316);
+      }
+
+      .purple {
+        background: linear-gradient(to top, #8b5cf6, #7c3aed);
+      }
+
+      h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+        color: #111827;
+      }
+
+      p {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.6;
+      }
+
+      .about-contact-logo {
+        position: absolute;
+        right: 10%;
+        width: 200px;
+        height: 200px;
+      transform: translateZ(-);
+
+        object-fit: contain;
+      }
+
+      .about-contact-logo>img {
+        width: 100%;
+        object-fit: contain;
+      }
+
+      .services {
+        display: flex;
+        flex-direction: row;
+        height: 1200px;
+    
+      
+      }
+
+      .textbox-container {
+        position: absolute;
+        max-width: 700px;
+        left: 55%;
+        transform: translatey(50%);
+        height: 600px;
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        font-family: "Nunito", sans-serif
+
+      }
+
+      .tagline {
+        color: #b0b9c4;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .main-heading {
+        font-size: 60px;
+        font-weight: 400px;
+        line-height: 1.5;
+      }
+
+      .highlight {
+        font-weight: 700;
+        text-decoration: underline;
+        color: #0c1b33;
+      }
+
+      .subtext {
+        font-size: 18px;
+        color: #7e8b9a;
+        margin-top: 30px;
+        margin-bottom: 40px;
+      }
+
+      .quote-btn {
+        padding: 15px;
+        border: 1px solid #e3e9f2;
+        border-radius: 30px;
+        background-color: white;
+        color: #7e8b9a;
+        font-size: 16px;
+        width: 200px;
+      }
+
+      .treed-container {
+        width: 100%;
+        background: #f3f4f4;
+        padding-top: 40px;
+        height: 1600px;
+        position: relative;
+        z-index: 0;
+        font-family: var(---font-service-banner);
+
+      }
+
+      .intro-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 5pc;
+        padding-right: 5pc;
+        padding-top: 5pc;
+      }
+
+      .subheading {
+        font-size: 14px;
+        color: #a0aec0;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 50px;
+      }
+
+      .toggle {
+
+        margin-left: 5pc;
+        display: inline-flex;
+        border-radius: 999px;
+        height: 70px;
+        width: 210px;
+        padding: 4px;
+        background: linear-gradient(to right, #0045ff, #2aa8cb);
+        margin-bottom: 50px;
+        box-shadow: 0 5px 15px rgba(0, 102, 255, 0.2);
+      }
+
+      .toggle button {
+        border: none;
+        padding: 10px 25px;
+        border-radius: 999px;
+        font-size: 14px;
+      }
+
+      .toggle .active {
+        background: #fff;
+        color: #3c6ef6;
+        font-weight: 600;
+      }
+
+      .toggle .inactive {
+        background: #0b2bfd;
+        color: ghostwhite;
+        font-weight: 600;
+      }
+
+      .price-plans {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 50px;
+        padding-top: 60px;
+      }
+
+      .card {
+        background-color: white;
+        padding: 40px 30px;
+        width: 320px;
+        height: 600px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        font-family: var(---price-card);
+      
+      }
+
+     .label {
+        font-size: 12px;
+        font-weight: bold;
+        padding: 5px 15px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+    .price {
+        font-size: 40px;
+        font-weight: bold;
+      }
+
+      .old-price {
+        font-size: 16px;
+        color: #aaa;
+        margin: 5px;
+      }
+
+     .desc {
+        font-size: 12px;
+        color: #7e8b9a;
+        padding: 20px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        
+      }
+
+      .basic {
+        background-color: #e8f3ff;
+        color: #007bff;
+      }
+
+      .advanced {
+        background-color: #ffe7d6;
+        color: #ff7a00;
+      }
+
+      .team {
+        background-color: #dfffea;
+        color: #0caf60;
+      }
+
+
+      .blue-section {
+        
+        position: relative;
+        background: linear-gradient(to right, #0643dd, #00c6ff);
+        color: white;
+        text-align: center;
+        width: 100%;
+        height: 1000px;
+        z-index: -1;
+        clip-path: polygon(50% 6%, 73% 2%, 100% 0, 100% 70%, 100% 100%, 50% 100%, 0 100%, 0% 70%, 0 30%, 20% 17%);
+        bottom: 20%;
+       
+      
+      }
+
+      .testim-img-left {
+        position: absolute;
+        left: 0%;
+        top: 50%;
+        width: 200px;
+        height: 200px;
+
+      }
+     testim-img-left>img{
+       width: 100%;
+       height: 100%;
+     }
+      .testim-right-img {
+        position: absolute;
+        right: 10%;
+        top: 5%;
+        width: 300px;
+        height: 300px;
+      }
+
+      .testim-condiner {
+        position: absolute;
+        left: 30%;
+        transform: translateX(-50%);
+        top: 40%;
+        width: 300px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        color: white;
+      }
+      .testim-condiner>p{
+        color: white;
+        font: 1em sans-serif;
+      }
+
+      .testimini-line-image {
+        position: absolute;
+        left: 60%;
+        transform: translateX(-50%);
+        top: 40%;
+        bottom: 0%;
+        width: 100%;
+        height: 100%;
+      }
+
+      .testim-cards {
+        position: absolute;
+        height: 500px;
+        top: 40%;
+        left: 45%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        
+      }
+
+      .testmini-card {
+        width: 350px;
+        height: 400px;
+
+      }
+
+      .white-cards {
+       padding-top: 20px;
+        width: 100%;
+       height: 200px;
+        background: white;
+        z-index: 0;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .transperant-card1 {
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.2);
+        opacity: 0.5;
+        position: absolute;
+        top: 50%;
+        left: 1%;
+        width: 330px;
+        height: 170px;
+      }
+
+      .transperant-card2 {
+        z-index: -2;
+        background: rgba(255, 255, 255, 0.2);
+        opacity: 0.5;
+        position: absolute;
+        top: 50%;
+        left: 2%;
+        width: 300px;
+        height: 200px;
+      }
+
+
+    .stars {
+      color: #f7b731;
+      font-size: 18px;
+      margin-bottom: 10px;
+    
+    } 
+    
+    .title {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+     
+    }
+
+    .description {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+     
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px; 
+    
+     }
+
+    .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+     
+    }
+
+    .profile-info {
+      font-size: 14px;
+    }
+
+    .profile-info .name {
+      font-weight: bold;
+     
+    }
+
+    .profile-info .role {
+      color: #007BFF;
+      font-size: 13px;
+    } 
+    
+    .portfolio-section {
+      padding: 50px 0;
+      text-align: center;
+      
+      font-family: var(--service-font);
+      height: 900px;
+    }
+   
+
+  }
+
+    @media only screen and (max-width: 768px) {
+      body {}
+
+      .navbar {
+        width: 0%;
+        display: none;
+      }
+
+      .hero-right-bg {
+        display: none;
+      }
+
+      .hero-left-bg {
+        display: none;
+      }
+
+      .hero-img {
+        display: none;
+      }
+
+      .hero-left-dot {
+        display: none;
+      }
+
+      .about-plate {
+        display: none;
+      }
+
+      .about-contact-logo {
+        display: none;
+      }
+
+      .banner-first {
+        width: 100%;
+        margin-top: 20%;
+
+      }
+
+      .welcome-lebal {
+        font-size: 30px;
+        padding: 20px;
+        width: 350px;
+        margin-top: 5px;
+      }
+
+      .banner-container {
+        margin-left: 30px;
+        height: 600px;
+        width: 900px;
+        display: flex;
+        flex-direction: column;
+        justify-items: left;
+        gap: 35px;
+
+      }
+
+      .text-container {
+        width: 100%;
+        height: 200px;
+        font-size: 62px;
+
+      }
+
+      .hero-top-center-dot {
+        display: none;
+      }
+
+      .btn {
+        width: 300px;
+        height: 80px;
+        border-radius: 30px;
+        align-content: center;
+        color: bisque;
+        font-size: 30px;
+        margin-top: 20px;
+      }
+
+      .about-left-banner {
+        display: none;
+      }
+
+      .about-right-bg {
+        display: none;
+      }
+
+      .aboutUs-container {}
+
+      .about-box {
+        margin-top: 50px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        width: 1000px;
+        height: 800px;
+        left: 0%;
+
+      }
+
+      .about-box>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+
+
+      .about-label {
+        font-size: 30px;
+        color: #868282;
+      }
+
+      .text-container-about {
+        font-size: 60px;
+        text-align: center;
+      }
+
+      .about-left-dot {
+        display: none;
+      }
+
+      .about-bottom-right-dot {
+        display: none;
+      }
+
+      .services {
+        width: 100%;
+        display: inline;
+
+      }
+
+      .card-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 90px;
+
+      }
+
+      .cards {
+        width: 100%;
+
+        height: 600px;
+        margin-bottom: 20px;
+        border: none;
+        box-shadow: none;
+      }
+
+      .icon {
+        width: 200px;
+        height: 200px;
+      }
+
+      .cards>h3 {
+        font-size: 60px;
+        margin-top: 20px;
+      }
+
+      .cards>p {
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      .textbox-container {
+        position: absolute;
+        left: 10%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 80%;
+      }
+
+      .tagline {
+        font-size: 20px;
+      }
+
+      .main-heading {
+        font-size: 40px;
+      }
+
+      .highlight {
+        font-size: 60px;
+      }
+
+      .subtext {
+        font-size: 16px;
+      }
+
+      .treed-container {
+        display: none;
+      }
+
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="home-page">
+    <div class="navbar">
+      <div></div>
+      <div class="item1">
+        <ol>
+          <li>Who We Are?</li>
+          <li>Solution</li>
+          <li>Portfollio</li>
+          <li>Blog</li>
+          <li>Contact</li>
+        </ol>
+      </div>
+
+      <div class="item2">
+        <ol>
+          <li>Support</li>
+          <li>Singin</li>
+          <div class="btn">Get A Quote</div>
+        </ol>
+      </div>
+    </div>
+    <div class="hero-right-bg">
+      <img src="/CSS/Major.Projects/Assets/hero-right-bg.png" alt="" />
+    </div>
+    <div class="hero-left-bg">
+      <img src="/CSS/Major.Projects/Assets/hero-left-bg.png" alt="" />
+    </div>
+
+    <div class="banner-first">
+      <div class="hero-img">
+        <img src="/CSS/Major.Projects/Assets/hero-banner.png" alt="" />
+      </div>
+      <div class="banner-container">
+        <div class="hero-top-center-dot">
+          <img src="/CSS/Major.Projects/Assets/hero-top-center-dot.png" />
+        </div>
+        <div class="welcome-lebal">welcome To the Game</div>
+        <div class="text-container">
+          Empower<br />
+          <img src="/CSS/Major.Projects/Assets/hero-left-dot.png" alt="hero-left-dot" class="hero-left-dot" />
+          Your Busines
+          <b>Better & Faster.</b>
+        </div>
+        <div class="btn">Get Started Now</div>
+      </div>
+
+    </div>
+    <div class="hero-bottom-left-dot">
+      <img src="/CSS/Major.Projects/Assets/hero-bottom-left-dot.png" alt="hero-bottom-left-dot" />
+    </div>
+
+
+    <div class="aboutUs-container">
+      <!-- <img src="/CSS/Major.Projects/Assets/about-center-dot.png" alt=""> -->
+      <div class="about-box">
+        <label class="about-label">About Us</label>
+        <div class="text-container-about">
+          A Team Of Passinate Designers<br />&Developers From New York.
+        </div>
+        <divider class="divider"></divider>
+        <div class="about-banner-img">
+          <img src="/CSS/Major.Projects/Assets/about-banner.png" alt="" class="about-banner" />
+        </div>
+      </div>
+      <div class="about-plate">
+        <img src="/CSS/Major.Projects/Assets/about-plant.png" alt="plant" class="plante-imge" />
+      </div>
+      <img src="/CSS/Major.Projects/Assets//about-left-dot.png" alt="" class="about-left-dot" />
+      <img src="/CSS/Major.Projects/Assets//about-bottom-right-dot.png" alt="" class="about-bottom-right-dot" />
+      <div class="about-left-banner">
+        <img src="/CSS/Major.Projects/Assets/about-left-banner.png" alt="" />
+      </div>
+      <div class="about-right-bg">
+        <img src="/CSS/Major.Projects/Assets/" alt="" />
+      </div>
+
+      <!-- aboutus -->
+    </div>
+
+    <div class="services">
+      <div class="card-container">
+        <div class="column">
+          <div class="cards">
+            <div class="icon blue">💻</div>
+            <h3>UI/UX Design</h3>
+            <p>
+              Landing Pages, User Flow, Wireframing, Prototyping, Mobile
+              AppDesign, Web App
+            </p>
+          </div>
+          <div class="cards">
+            <div class="icon orange">⚜️</div>
+            <h3>Branding</h3>
+            <p>
+              Landing Pages, User Flow, Wireframing, Prototyping, Mobile
+              AppDesign, Web App
+            </p>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="column right">
+          <div class="cards">
+            <div class="icon green">🥕</div>
+            <h3>Web Design</h3>
+            <p>
+              Landing Pages, User Flow, Wireframing, Prototyping, Mobile
+              AppDesign, Web App
+            </p>
+          </div>
+          <div class="cards">
+            <div class="icon purple">📦</div>
+            <h3>Product Design</h3>
+            <p>
+              Landing Pages, User Flow, Wireframing, Prototyping, Mobile
+              AppDesign, Web App
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="about-contact-logo">
+        <img src="/CSS//Major.Projects/Assets/about-contact-banner.png" alt="" />
+      </div>
+      <div class="textbox-container">
+        <div class="tagline">Our Services</div>
+
+        <div class="main-heading">
+          Grow Business<br />
+          <span class="highlight">With Wan.</span>
+        </div>
+
+        <div class="subtext">
+          We've been working with some awesome teams around the world.
+        </div>
+
+        <button class="quote-btn">Get A Quote</button>
+      </div>
+    </div>
+    <div class="treed-container">
+
+      <div class="intro-box">
+        <div class="intro-text">
+          <div class="subheading">Price & Plans</div>
+          <h2>Choose A Plan That's<br />Right For You.</h2>
+          <divider class="divider"> </divider>
+        </div>
+        <div class="toggle">
+          <button class="active">Monthly</button>
+          <button class="inactive">Yearly</button>
+        </div>
+      </div>
+
+      <div class="price-plans">
+        <div class="card">
+          <div class="label basic">BASIC</div>
+          <div class="price">$45.39</div>
+          <div class="old-price">$70.89</div>
+          <div class="desc">
+            HTML/CSS, JavaScript Animation, WordPress, Responsive Website.
+          </div>
+          <div class="desc">
+            Character Design, Icon Set, Illustration Guide, Illustration
+            Set.
+          </div>
+          <div class="desc">
+            Landing Pages, User Flow, Wireframing, Prototyping, Mobile App
+            Design, Web App.
+          </div>
+          <div class="quote-btn">Purchase Now</div>
+        </div>
+        <div class="card">
+          <div class="label advanced">ADVANCED</div>
+          <div class="price">$76.21</div>
+          <div class="old-price">$99.89</div>
+          <div class="desc">
+            HTML/CSS, JavaScript Animation, WordPress, Responsive Website.
+          </div>
+          <div class="desc">
+            Character Design, Icon Set, Illustration Guide, Illustration
+            Set.
+          </div>
+          <div class="desc">
+            Landing Pages, User Flow, Wireframing, Prototyping, Mobile App
+            Design, Web App.
+          </div>
+          <div class="btn">Purchase Now</div>
+        </div>
+
+        <div class="card">
+          <div class="label team">TEAM</div>
+          <div class="price">$109.15</div>
+          <div class="old-price">$199.89</div>
+          <div class="desc">
+            HTML/CSS, JavaScript Animation, WordPress, Responsive Website.
+          </div>
+          <div class="desc">
+            Character Design, Icon Set, Illustration Guide, Illustration
+            Set.
+          </div>
+          <div class="desc">
+            Landing Pages, User Flow, Wireframing, Prototyping, Mobile App
+            Design, Web App.
+          </div>
+          <div class="quote-btn">Purchase Now</div>
+        </div>
+      </div>
+      <div class="blue-section">
+        <div class="testim-img-left"><img src="./Assets/testimonial-left-banner.png" alt=""></div>
+        <div class="testim-right-img"><img src="./Assets/testimonial-right-banner.png" alt=""></div>
+        <div class="testimini-line-image"><img src="./Assets/testimonial-line-bg.png" alt=""></div>
+        <div class="box-container">
+          <div class="testim-condiner">
+
+            <div class="testim-text">
+              <div class="">Testimonials</div>
+              <h2>
+                Our Happy <br />Clients
+                Say's <br />About Us.</h2>
+
+            </div>
+            <divider class="divider"></divider>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi veritatis officia, sapiente ullam nihil,
+              officiis, ducimus voluptatum reprehenderit fugit dolor natus soluta itaque architecto perferendis sed et.
+              Officia, iste libero?</p>
+
+
+          </div>
+          <div class="testim-cards">
+            <div class="testmini-card">
+              <div class="white-cards">
+                  <div class="stars">★ ★ ★ ★ ☆</div>
+                <div class="title">“ Design Quality ”</div>
+                <p class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua.
+                </p>
+                <div class="profile">
+                  <img src="" alt="Avatar">
+                  <div class="profile-info">
+                    <div class="name">Rosalina D. William</div>
+                    <div class="role">Founder, Google</div>
+              </div>
+              <div class="transperant-card1"></div>
+              <div class="transperant-card2"></div>
+            </div>
+
+            <div class="testmini-card">
+              <div class="white-cards">
+              
+                  </div>
+                  <div class="transperant-card1"></div>
+                  <div class="transperant-card2"></div>
+                </div>
+              </div>
+              <!-- <div class="testim-cards">
+                   <div class="testimonial-card">
+    <div class="stars">★ ★ ★ ★ ☆</div>
+    <div class="title">“ Design Quality ”</div>
+    <div class="description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    <div class="profile">
+      <img src="" alt="Avatar">
+      <div class="profile-info">
+        <div class="name">Rosalina D. William</div>
+        <div class="role">Founder, Google</div>
+      </div>
+    </div>
+  </div>
+  </div> -->
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+
+  <section class="portfolio-section">
+    <p class="subheading">Portfolio</p>
+    <h2 class="main-heading">We Have So Many<br>Awesome Stuffs</h2>
+    
+    <divider class="divider"></divider>
+
+    <div class="grid-container">
+     <div class="portfolio-item">
+        <img src="https://via.placeholder.com/300x300?text=Vinyl" alt="Vinyl Cover">
+        <div class="">
+          <p class="category">Branding</p>
+          <p class="name">Likaoli D. Perunaolo</p>
+        </div>
+      </div>
+
+
+      <div class="portfolio-item">
+        <img src="https://via.placeholder.com/300x300?text=Package" alt="Package Design">
+        <div class="">
+          <p class="category">Logo</p>
+          <p class="name">Humble Co.</p>
+        </div>
+      </div>
+
+
+      <div class="portfolio-item">
+        <img src="https://via.placeholder.com/300x300?text=Helmet" alt="Helmet">
+        <div class="items-text">
+          <p class="category">Logo</p>
+          <p class="name">Humble Co.</p>
+        </div>
+      </div>
+
+      
+      <div class="portfolio-item">
+        <img src="https://via.placeholder.com/300x300?text=Chair" alt="Chair">
+        <div class="items-text">
+          <p class="category">Branding</p>
+          <p class="name">Likaoli D. Perunaolo</p>
+        </div>
+      </div>
+
+     
+      <div class="portfolio-item">
+        <img src="https://via.placeholder.com/300x300?text=Bottles" alt="Bottles">
+        <div class="items-text">
+          <p class="category">Branding</p>
+          <p class="name">Milk Pack Co.</p>
+        </div>
+      </div>
+
+     
+      <div class="portfolio-item">
+        <div>
+        <img src="https://via.placeholder.com/300x300?text=Mug" alt="Mug">
+        </div>
+        <div class="items-text">
+          <p class="category">Branding</p>
+          <p class="name">Coffee Co.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</body>
+
+</html>
