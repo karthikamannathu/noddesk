@@ -24,7 +24,7 @@ deleteButton.addEventListener('click',function(){
 })
 
 
-listItem.appendChild(deleteButton);
+listItem.appendChild(addBtn);
 
 list.appendChild(listItem)
 
