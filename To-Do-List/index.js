@@ -14,8 +14,23 @@ function addTask(){
 const listItem = document.createElement('li');
 listItem.textContent = taskText;
 
-
+//  create Remove button
 const deleteButton = document.createElement('button');
 deleteButton.textContent = 'remove';
 
+// Add event to delete button
+deleteButton.addEventListener('click',function(){
+    listItem.remove()
+})
+
+
+listItem.appendChild(deleteButton);
+
+list.appendChild(listItem)
+
+input.value = '';
+
 }
+
+addBtn.addEventListener('click',addTask);
+
