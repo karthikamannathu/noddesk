@@ -1,35 +1,23 @@
-const fetchData = new Promise((resolve, reject) =>{
- console.log('Executor function stared... (Fetach)')
- 
- 
- setTimeout(() => {
-    const success = true;
-    if (success) {
-        const data = { id: 1,message:'Hello Promise!'};
-        console.log('Data fetched. Resolving promise!')
-       resolve(data);
-    } else {
-        const error = new Error('culoud not fetch data!');
-        console.log('Error fetching Rejecting promise.')
-        reject(error);
+async function fetchDataSafe(params) {
+    try {
+    console.log('Fetching all user data ...')
+
+    const user = await fetchUser('user123');
+    console.log('Got user :',user);
+    
+    const posts = await fetchPosts(user.id);
+    console.log('Got post:',posts);
+
+    const comments = await fetchComments(posts[0].id);
+    console.log('Got user :',comments);
+    
+    return comments;
         
+    } catch (error) {
+       console.error('An error occured:',error); 
+    } finally{
+        console.log("All operations are complete.");
     }
- },2000);
-})
+}
 
-console.log('program started.');
-
-fetchData
-.then((result) => {
-    console.log("Promise Fulfilled!")
-    console.log("Received data:",result)
-
-})
-.catch((error) => {
-    console.error("Promise Rejected!");
-    console.error(error.message);
-})
-.finally(() => {
-    console.log("Promise has settled. Hiding loading spinner.");
-});
-console.log("This log before the promise is fulifilled!");
+fetchDataSafe();
