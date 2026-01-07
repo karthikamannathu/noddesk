@@ -16,3 +16,20 @@ const fetchData = new Promise((resolve, reject) =>{
     }
  },2000);
 })
+
+console.log('program started.');
+
+fetchData
+.then((result) => {
+    console.log("Promise Fulfilled!")
+    console.log("Received data:",result)
+
+})
+.catch((error) => {
+    console.error("Promise Rejected!");
+    console.error(error.message);
+})
+.finally(() => {
+    console.log("Promise has settled. Hiding loading spinner.");
+});
+console.log("This log before the promise is fulifilled!");
