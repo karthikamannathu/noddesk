@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Notes</title>
+    <style>
+        body { font-family: sans-serif;padding: 2rem;}
+        textarea{ width: 100%; height: 150px; margin-bottom: 1rem;
+        box-sizing: border-box; }
+        button { padding: 0.5rem 1rem; cursor: pointer;}
+    </style>
+</head>
+<body>
+    <h1>My presistent Note</h1>
+    <p>Write something below. It will be saved automatically. Refresh 
+        the page or close and reopen this tab to see it persist!
+    </p>
+    <textarea id="note-input" placeholder="write your note here...">
+    </textarea>
+    <button id="clear-button">Clear Note</button>
+
+    <script>
+        const noteInput = document.getElementById('note-input');
+        const clearButton = document.getElementById('clear-button');
+        const storageKey = 'userNote';
+
+        function loadNote() {
+            const savedNote = localStorage.getItem(storageKey);
+            if(savedNote){
+                noteInput.value =savedNote;
+            }
+        }
+         document.addEventListener('DOMContentLoaded', loadNote);
+
+
+             function saveNote() {
+      localStorage.setItem(storageKey, noteInput.value);
+    }
+    // Save the note whenever the user types
+    noteInput.addEventListener('input', saveNote);
+
+    // Handle the clear button
+    clearButton.addEventListener('click', () => {
+      noteInput.value = '';
+      localStorage.removeItem(storageKey);
+    });
+    </script>
+</body>
+</html>
