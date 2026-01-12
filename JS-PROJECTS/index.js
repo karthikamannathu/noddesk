@@ -7,3 +7,4 @@ const recipeResult = document.getElementById('recipe-result');
 const viewRecipeBtn = document.getElementsByClassName('view-recipe-btn');
 const  recipeModal= document.getElementById('recipe-modal');
 const closeBtn = document.getElementsByClassName('close-btn');
+
