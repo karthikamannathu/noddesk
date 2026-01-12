@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe App</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
     <div class="container">
@@ -16,9 +17,19 @@
         </header>
 
         <main id="recipe-result">
-            Recipe cards will be dynamically
+          <div class="recipe_result">
+              <img src="" alt="RecipeImg">
+              <h3>  Recipe Title Here </h3>
+              <button class="view-recipe-bta">View Recipe</button>
+          </div>
         </main>
         
+        <div id="recipe-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">❌</span>
+                <div id="modal-body"></div>
+            </div>
+        </div>
 
     </div>
 </body>
