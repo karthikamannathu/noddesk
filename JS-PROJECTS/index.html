@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe App</title>
     <link rel="stylesheet" href="./index.css">
+    <link rel="script" href="./index.js">
 </head>
 <body>
     <div class="container">
@@ -17,8 +18,8 @@
         </header>
 
         <main id="recipe-result">
-          <div class="recipe_result">
-              <img src="" alt="RecipeImg">
+          <div class="recipe-card">
+              <img src="https://placehold.co/300x200/f8c471/515a5a?text=Recipe+Image" alt="RecipeImg">
               <h3>  Recipe Title Here </h3>
               <button class="view-recipe-btn">View Recipe</button>
           </div>
@@ -26,7 +27,7 @@
         
         <div id="recipe-modal" class="modal">
             <div class="modal-content">
-                <span class="close-btn">❌</span>
+                <span class="close-btn">&times;</span>
                 <div id="modal-body"></div>
             </div>
         </div>
