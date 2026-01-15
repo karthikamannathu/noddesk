@@ -7,7 +7,7 @@ const searchBtn = document.getElementById('serachBtn');
 const recipeResult = document.getElementById('recipe-result');
 const viewRecipeBtn = document.getElementsByClassName('view-recipe-btn');
 const  recipeModal= document.getElementById('recipe-modal');
-const closeBtn = document.getElementsByClassName('close-btn');
+const closeBtn = document.querySelector('close-btn');
 
 
 
@@ -19,11 +19,12 @@ const LOOKUP_API_URL = ' https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 
 //  ̇ADD EVENT LISTNERS
 searchBtn.addEventListener('click',serachRecipesClick);
-viewRecipeBtn.addEventListener('click',handleviewRecipeClick(CloseEvent));
-closeBtn.addEventListener('click',closeModel);
-recipeModal.addEventListener('click',(e) => {
-    closeModel();
-})
+recipeResult.addEventListener('click',handleviewRecipeClick);
+// closeBtn.addEventListener('click',closeModel)
+// recipeModal.addEventListener('click',(e) => {
+//     if(e.target === recipeModal)
+//     closeModel()
+// });
 
 
 async function serachRecipesClick() {
@@ -58,25 +59,31 @@ recipeResult.innerHTML = '';
 meals.map(meal => {
     
     const recipeCard = document.createElement('div')
+    console.log(meal)
     recipeCard.className = 'recipe-card';
     recipeCard.innerHTML = `<img src = "${meal.strMealThumb}" alt = "${meal.strMeal}">
     <h3>${meal.strMeal}</h3>
-    <button className = "view-recipe-btn" data-meal-id="${meal.idMeal}">View Recipe</button>`;
+    <button class = "view-recipe-btn" data-meal-id="${meal.idMeal}">View Recipe</button>`;
     recipeResult.appendChild(recipeCard);
 })
 }
 
 
 
-function handleviewRecipeClick(event){
-     if (event.target.classList.contains('view-recipe-btn')) {
-         const mealId = event.target.getAttribute('data-meal-id');
-        console.log(event)
-         getRecipeDetails(mealId);
-     }
+ function handleviewRecipeClick(event){
+  try {
+    
+      if (event.target.classList.contains('view-recipe-btn')) {
+           const mealId = event.target.getAttribute('data-meal-id');
+          getRecipeDetails(mealId);
+ 
+      }
+  } catch (error) {
+    console.error
+  }
 }
 
-
+ 
 
 async function getRecipeDetails(mealId){
     try{
@@ -88,4 +95,7 @@ async function getRecipeDetails(mealId){
 console.log(error)
     }
 }
+
+
+
  
