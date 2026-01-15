@@ -55,6 +55,13 @@ header h1{
 .recipe_result h3{
     font:bolder
 }
+
+.recipe-card{
+  
+}.recipe-card>img{
+ width: 50%;
+ height: 50%;
+}
 .view-recipe-btn{
     padding: 10px 80px;
    border: none;
