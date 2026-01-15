@@ -6,6 +6,7 @@ const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('serachBtn');
 const recipeResult = document.getElementById('recipe-result');
 const viewRecipeBtn = document.getElementsByClassName('view-recipe-btn');
+const modalBody = document.getElementById('modal-body')
 const  recipeModal= document.getElementById('recipe-modal');
 const closeBtn = document.querySelector('close-btn');
 
@@ -20,11 +21,11 @@ const LOOKUP_API_URL = ' https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 //  ̇ADD EVENT LISTNERS
 searchBtn.addEventListener('click',serachRecipesClick);
 recipeResult.addEventListener('click',handleviewRecipeClick);
-// closeBtn.addEventListener('click',closeModel)
-// recipeModal.addEventListener('click',(e) => {
-//     if(e.target === recipeModal)
-//     closeModel()
-// });
+closeBtn.addEventListener('click',closeModel)
+recipeModal.addEventListener('click',(e) => {
+    if(e.target === recipeModal)
+    closeModel()
+});
 
 
 async function serachRecipesClick() {
@@ -76,8 +77,7 @@ meals.map(meal => {
       if (event.target.classList.contains('view-recipe-btn')) {
            const mealId = event.target.getAttribute('data-meal-id');
           getRecipeDetails(mealId);
- 
-      }
+       }
   } catch (error) {
     console.error
   }
@@ -89,12 +89,44 @@ async function getRecipeDetails(mealId){
     try{
         const response = await fetch(`${LOOKUP_API_URL}${mealId}`);
         const data = await response.json();
-        console.log(data)
+     const meal = data.meals[0];
+     displayRecipeDeatails(meal)
     }
     catch(error){
 console.log(error)
     }
 }
+
+function displayRecipeDeatails(meals){
+    let ingredientHTML = '<ul>'
+    for (let i=1; i<= 20; i++) {
+        const ingredient = meals[`strIngredient${i}`];
+        const measure = meals[`strMeasure${i}`];
+        if (ingredient && ingredient.trim() !=='') {
+            ingredientHTML +=`<li> ${measure}${ingredient}</li>`
+        }
+        else{
+            break;
+        }
+
+    }
+ingredientHTML += `</ul>`;
+
+
+modalBody.innerHTML = `
+<h2> ${meals.strMeal} </h2>
+<img src= "${meals.strMealThumb} alt ="${meals.strMeal}">
+<h3> Ingredients:</h3>
+<p>${meals.strInstructions} </p>`;
+
+recipeModal.style.display ='block';
+
+function closeModel() {
+    recipeModal.style.display = 'none';
+}
+}
+
+
 
 
 
