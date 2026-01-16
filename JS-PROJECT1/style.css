@@ -4,9 +4,9 @@
 }
 
 main{
-    background-color: #000;
+    background-color: #ebe6e6;
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 header{
@@ -26,8 +26,30 @@ header>h2{
  background-color: blueviolet;
 }
 
+
+
 .task-container{
-    width: auto;
-    height: 400px;
-    background-color: aqua;
+   width: 100%;
+  margin-bottom: 40px;
+  padding: 20px 10px;
+  background:white;
+  border: solid #b7b5b5;
 }
+
+.sub-header{
+width: 100%;
+height: 10px;
+display: flex;
+justify-content: space-between;
+}
+
+#input-task-box{
+    max-width: 100%;
+    height:100px;
+    column-count: 3;
+   
+    border: solid;
+    
+    
+}
+
