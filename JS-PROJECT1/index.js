@@ -41,12 +41,12 @@ function taskCategoryDefaultSet(btnId){
 
 //  console.log(btnId,"btnId")
 
-const optins = document.createElement('option')
+const options = document.createElement('option')
 const currentTask = TaskArray.filter(value => value.toLowerCase().includes( btnId.toLowerCase() ))
 console.log(currentTask)
 
-
-
+options.textContent = currentTask;
+selectTagId.appendChild(options);
 // optins.textContent = btnId;
 // selectTagId.appendChild(optins)
 }
