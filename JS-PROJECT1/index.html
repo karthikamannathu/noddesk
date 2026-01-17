@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main>
+    <main id="main">
         <header>
             <h2 class="to-do">To Do</h2>
             <h2 class="in-progress" >In Progress</h2>
@@ -17,14 +17,14 @@
         
 
             <div class="task-container">
-                <div class="sub-header">
+                <div class="sub-header" >
                 <h3 class="critical">Critical</h3>
-                <button class="add-task">+</button>
+                <button class="add-task"  id="add-Critical">+</button>
                 </div>
-                  <div id="input-task-box">
-                    <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
+                  <div class="input-task-box">
+                    <div class="task-cloum" data-status ='to-do'></div>
+                    <div class="task-cloum" data-status ='in-progress'></div>
+                    <div class="task-cloum" data-status ='Done'></div>
                   </div>
                 </div>
                 
@@ -32,12 +32,12 @@
             <div class="task-container">
                 <div class="sub-header">
                   <h3 class="issuse-tickets">Issuse-Tickets</h3>
-                  <button class="add-task">+</button>
+                  <button class="add-task" id="issuse-tickets">+</button>
                 </div>
-                <div id="input-task-box">
-                    <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
+                <div class="input-task-box">
+                    <div class="task-cloum" data-status='to-do'></div>
+                    <div class="task-cloum" data-status='in-progress'></div>
+                    <div class="task-cloum" data-status='Done'></div>
                 </div>
             </div>    
                 
@@ -45,24 +45,23 @@
             <div class="task-container">
                 <div class="sub-header">
                  <h3 class="maintenance">Maintenance</h3>
-                 <button class="add-task">+</button>
+                 <button class="add-task" id="maintenance">+</button>
                 </div>
-                <div id="input-task-box">
-                     <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
-                </div>
-            </div>    
+                <div class="input-task-box">
+                     <div class="task-cloum"data-status='to-do'></div>
+                    <div class="task-cloum" data-status ='in-progress'></div>
+                    <div class="task-cloum" data-status ='Done'></div>
+                </div>          </div>    
     
             <div class="task-container">
                 <div class="sub-header">
                     <h3 class="unplanned">Unplanned</h3>
-                    <button class="add-task">+</button>
+                    <button class="add-task" id="unplanned">+</button>
                 </div>
-                <div id="input-task-box">
-                    <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
-                    <div class="task-cloum"></div>
+                <div class="input-task-box">
+                    <div class="task-cloum" data-status ='to-do'></div>
+                    <div class="task-cloum" data-status ='in-progress'></div>
+                    <div class="task-cloum" data-status ='Done'></div>
                 </div>
             </div>
 
@@ -70,5 +69,26 @@
             </div>
         </div>
     </main>
+    <div id="task-modal" class="modal">
+    <div class="modal-content">
+        <h3>Add New Task</h3>
+        <label>Priority / Category</label>
+        <select id="task-options" size ='1'>
+            <option value ='critical'>Critical</option>
+            <option value ='issuse-tickets'>Issuse-Tickets</option>
+            <option value ='maintenance'>Maintenance</option>
+            <option value ='unplanned'>Unplanned</option>
+        </select>
+        <label for="Title">Title</label>
+        <input type="text" placeholder="Task title..">
+        Description
+        <textarea id="task-description" placeholder="Detais..."></textarea>
+        <div class="modal-buttons">
+            <button id="save-task">Add Task</button>
+            <button id="close-modal">Cancel</button>
+        </div>
+    </div>
+</div>
+    <script src="./index.js"></script>
 </body>
 </html>
