@@ -19,7 +19,7 @@
             <div class="task-container">
                 <div class="sub-header" >
                 <h3 class="critical">Critical</h3>
-                <button class="add-task"  id="add-Critical">+</button>
+                <button class="add-task"  id="Critical">+</button>
                 </div>
                   <div class="input-task-box">
                     <div class="task-cloum" data-status ='to-do'></div>
@@ -56,7 +56,7 @@
             <div class="task-container">
                 <div class="sub-header">
                     <h3 class="unplanned">Unplanned</h3>
-                    <button class="add-task" id="unplanned">+</button>
+                    <button class="add-task" id="unplaned">+</button>
                 </div>
                 <div class="input-task-box">
                     <div class="task-cloum" data-status ='to-do'></div>
@@ -74,13 +74,10 @@
         <h3>Add New Task</h3>
         <label>Priority / Category</label>
         <select id="task-options" size ='1'>
-            <option value ='critical'>Critical</option>
-            <option value ='issuse-tickets'>Issuse-Tickets</option>
-            <option value ='maintenance'>Maintenance</option>
-            <option value ='unplanned'>Unplanned</option>
+           
         </select>
         <label for="Title">Title</label>
-        <input type="text" placeholder="Task title..">
+        <input type="text" placeholder="Task title.." id="title-input"              >
         Description
         <textarea id="task-description" placeholder="Detais..."></textarea>
         <div class="modal-buttons">

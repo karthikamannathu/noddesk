@@ -3,43 +3,71 @@ const taskBoxInput =  document.querySelectorAll('.task-cloumm');
 const taskModel = document.querySelector('#task-modal');
 const mainSection = document.querySelector('#main');
 const saveTask = document.querySelector('#save-task');
-const closeModal = document.querySelector('#close-modal')
+const closeModal = document.querySelector('#close-modal');
+const titleInput = document.querySelector('#title-input')
+const description = document.querySelector('#task-description');
+const selectTagId  = document.querySelector('#task-options');
 
+const TaskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
 
 try {
        addTaskButton.forEach(  button => {
      button.addEventListener('click', async(e) =>{
-         const categoryId = e.target.id;
-         taskModel.dataset.activeCategory = await categoryId;
-         if (taskModel.dataset.activeCategory = true) {
+       
+         const buttonId = await e.target.id;
+        //  console.log(e.target,'e.target')
+        //  taskModel.dataset.activeCategory = await categoryId;
+         
+         if (buttonId ) {
               mainSection.setAttribute('inert','');
              mainSection.style.opacity = '.4';
              mainSection.style.pointerEvents = 'none';
              taskModel.style.display = 'flex';
-            // console.log(taskModel.dataset.activeCategory )
-            saveTask.addEventListener('click',saveTaskClick)
-            closeModal.addEventListener('click',closeClick)
-            
-         } 
-    
-     })
-    })
+             taskCategoryDefaultSet(buttonId);
+            // console.log( 'buttonId',buttonId)
+            // saveTask.addEventListener('click',saveTaskClick)
+            // closeModal.addEventListener('click',closeClick)
+            // taskOptionsInputs.addEventListener('click',taskOptionClick)
+        } })
+    });
     
    } catch (error) {
-    
-    console.log(error)
- 
-   }
+    console.log(error)};
 
 
 
 
-function saveTaskClick(){
+function taskCategoryDefaultSet(btnId){
 
+//  console.log(btnId,"btnId")
+
+const optins = document.createElement('option')
+const currentTask = TaskArray.filter(value => value.toLowerCase().includes( btnId.toLowerCase() ))
+console.log(currentTask)
+
+
+
+// optins.textContent = btnId;
+// selectTagId.appendChild(optins)
+}
+
+// function taskOptionClick(e) {
+//     const event = e.target
+//     console.log(event,"event")
+// }
+
+
+async function saveTaskClick(){
+  
 }
 
 
 
 function closeClick(){
+    
+}
+
+
+async function taskOptionSet(e) {
     
 }
