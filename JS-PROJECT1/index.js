@@ -8,7 +8,7 @@ const titleInput = document.querySelector('#title-input')
 const description = document.querySelector('#task-description');
 const selectTagId  = document.querySelector('#task-options');
 
-const TaskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
+const taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
 
 try {
        addTaskButton.forEach(  button => {
@@ -37,16 +37,26 @@ try {
 
 
 
-function taskCategoryDefaultSet(btnId){
+async function taskCategoryDefaultSet(btnId){
 
 //  console.log(btnId,"btnId")
 
 const options = document.createElement('option')
-const currentTask = TaskArray.filter(value => value.toLowerCase().includes( btnId.toLowerCase() ))
-console.log(currentTask)
+const currentTask = taskArray.filter(value => value.toLowerCase().includes( btnId.toLowerCase() )
+)
 
-options.textContent = currentTask;
+
+options.textContent =  currentTask;
 selectTagId.appendChild(options);
+const arrayIndex = taskArray.indexOf(String(currentTask))
+taskArray.splice(arrayIndex,1);
+
+taskArray.map(value => {
+    const nextOptions = document.createElement('option');
+    nextOptions.textContent = value;
+    nextOptions.value = value;
+    selectTagId.appendChild(nextOptions)
+})
 // optins.textContent = btnId;
 // selectTagId.appendChild(optins)
 }
