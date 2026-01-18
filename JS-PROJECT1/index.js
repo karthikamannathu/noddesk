@@ -8,13 +8,14 @@ const titleInput = document.querySelector('#title-input')
 const description = document.querySelector('#task-description');
 const selectTagId  = document.querySelector('#task-options');
 
-const taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
+let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
+
 
 try {
        addTaskButton.forEach(  button => {
      button.addEventListener('click', async(e) =>{
        
-         const buttonId = await e.target.id;
+         let buttonId = await e.target.id;
         //  console.log(e.target,'e.target')
         //  taskModel.dataset.activeCategory = await categoryId;
          
@@ -38,35 +39,49 @@ try {
 
 
 async function taskCategoryDefaultSet(btnId){
+  // ckeck array include the current btn task
 
-//  console.log(btnId,"btnId")
+  try {
+   taskArray.filter(value => value.toLocaleLowerCase() !== btnId.toLocaleLowerCase())
+  // console.log(filterArray,"filterArray")
+  taskArray.unshift(btnId)
 
-const options = document.createElement('option')
-const currentTask = taskArray.filter(value => value.toLowerCase().includes( btnId.toLowerCase() )
-)
+// append  selection options
 
+      taskArray.map(data =>{
+      const taskOptions = document.createElement('option');
+      taskOptions.textContent = data;
+      taskOptions.value =data;
+      selectTagId.appendChild(taskOptions)
 
-options.textContent =  currentTask;
-selectTagId.appendChild(options);
-const arrayIndex = taskArray.indexOf(String(currentTask))
-taskArray.splice(arrayIndex,1);
-
-taskArray.map(value => {
-    const nextOptions = document.createElement('option');
-    nextOptions.textContent = value;
-    nextOptions.value = value;
-    selectTagId.appendChild(nextOptions)
+ selectTagId.addEventListener('click',e => {
+  // console.log(e.target.value,'e.target.value')
+ btnId = e.target.value;
+return btnId;
 })
-// optins.textContent = btnId;
-// selectTagId.appendChild(optins)
+
+
+    })
+  
+    
+  } catch (error) {
+  console.log(error)
+  }
+
+
+
+
+
+
+
+ 
 }
+function taskCategory(taks){
 
-// function taskOptionClick(e) {
-//     const event = e.target
-//     console.log(event,"event")
-// }
+const task = taks;
 
-
+}
+console.log(taskArray,"taskArray global")
 async function saveTaskClick(){
   
 }
@@ -81,3 +96,66 @@ function closeClick(){
 async function taskOptionSet(e) {
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const firstOptions = document.createElement('option')
+// const currentTask = taskArray.filter(value => value.toLowerCase().includes( btnId.toLowerCase() ) //check btn id equal element in task Array
+// )
+// firstOptions.textContent =  currentTask;
+// firstOptions.value = currentTask;
+// firstOptions.id = currentTask;
+//  selectTagId.appendChild(firstOptions);
+
+
+// const arrayIndex = taskArray.indexOf(String(currentTask))
+//         taskArray.splice(arrayIndex,1);  //task Array iteration
+
+// //append nest optons list
+//  taskArray.map(value => {
+//     const nextOptions = document.createElement('option');
+//     nextOptions.textContent = value;
+//     nextOptions.value = value;
+   
+//     selectTagId.appendChild(nextOptions)
+   
+    
+// })
+
+// emptyArray = btnId
+ 
+// // console.log(btnId)
+//  console.log(emptyArray,"optionId0")
+
+// selectTagId.addEventListener('change',taskChange);
+
+// async function taskChange(e) {
+   
+//   const optionId =  e.target.value; 
+ 
+// console.log(emptyArray ,'optionId 2');    
+// }  
+ 
+//   console.log(emptyArray,"optionId1")
