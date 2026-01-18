@@ -4,7 +4,7 @@ const taskModel = document.querySelector('#task-modal');
 const mainSection = document.querySelector('#main');
 const saveTask = document.querySelector('#save-task');
 const closeModal = document.querySelector('#close-modal');
-const titleInput = document.querySelector('#title-input')
+const titleId = document.querySelector('#title-input')
 const description = document.querySelector('#task-description');
 const selectTagId  = document.querySelector('#task-options');
 
@@ -25,8 +25,9 @@ try {
              mainSection.style.pointerEvents = 'none';
              taskModel.style.display = 'flex';
              taskCategoryDefaultSet(buttonId);
+             
             // console.log( 'buttonId',buttonId)
-            // saveTask.addEventListener('click',saveTaskClick)
+             saveTask.addEventListener('click',saveTaskClick)
             // closeModal.addEventListener('click',closeClick)
             // taskOptionsInputs.addEventListener('click',taskOptionClick)
         } })
@@ -47,44 +48,55 @@ async function taskCategoryDefaultSet(btnId){
   taskArray.unshift(btnId)
 
 // append  selection options
-
-      taskArray.map(data =>{
+    taskArray.map (data  =>{
       const taskOptions = document.createElement('option');
-      taskOptions.textContent = data;
-      taskOptions.value =data;
+       taskOptions.textContent = data;
+      taskOptions.value = data;
       selectTagId.appendChild(taskOptions)
-
- selectTagId.addEventListener('click',e => {
-  // console.log(e.target.value,'e.target.value')
- btnId = e.target.value;
-return btnId;
-})
+      });
 
 
-    })
-  
+
+
     
   } catch (error) {
   console.log(error)
-  }
+  }}
 
 
-
-
-
-
-
- 
-}
-function taskCategory(taks){
-
-const task = taks;
+function taskOptionChange(){
 
 }
-console.log(taskArray,"taskArray global")
+
+
 async function saveTaskClick(){
-  
-}
+ try {
+  // category selection input
+   let selectInput = await selectTagId.value;
+    if (selectInput === ''){
+    console.log('selected is empty')
+    }
+     selectTagId.addEventListener('change',e =>{
+      selectInput =  e.target.value 
+     });
+
+
+// title input get
+let titleInput = await titleId.value
+
+  if (titleInput === '') {
+     alert('plase add any task')
+  } 
+console.log(titleInput)
+
+
+
+
+    } catch (error) {
+      console.error
+    } 
+    
+    }
 
 
 
