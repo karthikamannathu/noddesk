@@ -5,10 +5,13 @@ const mainSection = document.querySelector('#main');
 const saveTask = document.querySelector('#save-task');
 const closeModal = document.querySelector('#close-modal');
 const titleId = document.querySelector('#title-input')
-const description = document.querySelector('#task-description');
+const descriptionId = document.getElementById('task-description');
 const selectTagId  = document.querySelector('#task-options');
-
+ 
 let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
+let storeKey = 'UserTask';
+
+
 
 
 try {
@@ -39,7 +42,7 @@ try {
 
 
 
-async function taskCategoryDefaultSet(btnId){
+function taskCategoryDefaultSet(btnId){
   // ckeck array include the current btn task
 
   try {
@@ -64,9 +67,7 @@ async function taskCategoryDefaultSet(btnId){
   }}
 
 
-function taskOptionChange(){
 
-}
 
 
 async function saveTaskClick(){
@@ -80,17 +81,18 @@ async function saveTaskClick(){
       selectInput =  e.target.value 
      });
 
-
 // title input get
 let titleInput = await titleId.value
-
   if (titleInput === '') {
      alert('plase add any task')
   } 
-console.log(titleInput)
+// describe input get
+let descriptionInput = await descriptionId.data
+
+saveState(selectInput,titleInput,descriptionInput)
 
 
-
+ console.log(data.selectedTask)
 
     } catch (error) {
       console.error
@@ -98,8 +100,15 @@ console.log(titleInput)
     
     }
 
+function saveState(){
+localStorage.setItem(storeKey,selectInput);
+localStorage.setItem(storeKey,titleInput);
+localStorage.setItem(storeKey,descriptionInput);
+}
 
-
+function loadState(){
+  
+}
 function closeClick(){
     
 }
