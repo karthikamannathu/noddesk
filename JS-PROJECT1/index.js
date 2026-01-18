@@ -87,12 +87,13 @@ let titleInput = await titleId.value
      alert('plase add any task')
   } 
 // describe input get
-let descriptionInput = await descriptionId.data
+let descInput = await descriptionId.value
 
-saveState(selectInput,titleInput,descriptionInput)
+saveState(selectInput,titleInput,descInput)
+loadState()
+console.log(saveState,'saveState')
+console.log(loadState,'loadState')
 
-
- console.log(data.selectedTask)
 
     } catch (error) {
       console.error
@@ -100,14 +101,24 @@ saveState(selectInput,titleInput,descriptionInput)
     
     }
 
-function saveState(){
-localStorage.setItem(storeKey,selectInput);
-localStorage.setItem(storeKey,titleInput);
-localStorage.setItem(storeKey,descriptionInput);
+function saveState(selectInput,titleInput,descInput){
+  console.log('save state is loding')
+ localStorage.setItem('task',JSON.stringify(selectInput));
+ localStorage.setItem('title',JSON.stringify(titleInput));
+ localStorage.setItem('description',JSON.stringify(descInput));
+// localStorage.setItem(storeKey,titleInput);
+// localStorage.setItem(storeKey,descInput);
 }
 
 function loadState(){
-  
+  try{const saveData = localStorage.getItem('Task');
+  if(saveData) {
+    console.log(JSON.parse(saveData),"saveData")
+  }
+  console.log(loadState,'loadState')
+}catch(error){
+console.error
+}
 }
 function closeClick(){
     
