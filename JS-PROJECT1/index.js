@@ -23,11 +23,19 @@ try {
         //  console.log(e.target,'e.target')
         //  taskModel.dataset.activeCategory = await categoryId;
          
-         if (buttonId ) {
-              mainSection.setAttribute('inert','');
+         if  (buttonId ) {
+
+         taskModel.style.display = 'flex';
+          if (taskModel.style.display != 'none') {
+             mainSection.setAttribute('inert','');
              mainSection.style.opacity = '.4';
-             mainSection.style.pointerEvents = 'none';
+            mainSection.style.pointerEvents = 'none';
              taskModel.style.display = 'flex';
+          } 
+            //   mainSection.setAttribute('inert','');
+            //  mainSection.style.opacity = '.4';
+            //  mainSection.style.pointerEvents = 'none';
+            //  taskModel.style.display = 'flex';
              taskCategoryDefaultSet(buttonId);
              
             // console.log( 'buttonId',buttonId)
@@ -106,12 +114,12 @@ loadState()
 function saveState(selectInput){
  console.log('saveState is loding');
  localStorage.setItem('task',JSON.stringify(selectInput));
+
 //  localStorage.setItem('title',JSON.stringify(titleInput));
 //  localStorage.setItem('description',JSON.stringify(descInput));
 
 //  localStorage.removeItem('Task');
-// localStorage.setItem(storeKey,titleInput);
-// localStorage.setItem(storeKey,descInput);
+
 }
 
 async function loadState(){
@@ -134,9 +142,6 @@ console.error
 }
 
  function runderBoard(taskName) {
-// 
-
-
   // get  All input boxs classNames
 
 // find the taks store key equal, className  using element
@@ -154,12 +159,8 @@ console.log(taskCard,"taskCard")
   allChidern[0].appendChild(taskCard) //create task cards
 
 
-//  close();
-//   taskCard.addEventListener('click')
-// });
-close();
 
- }
+close(); }
 
 function createTaskCard(taskName){
 const card = document.createElement('div');
@@ -169,20 +170,21 @@ const card = document.createElement('div');
 
 }
 
+
+
+
+
+
+
+
 function updateTaskLocation(){
 
 }
 
-
-
-
 function close(){
      taskModel.style.display = 'none';
+
 }
-
-
-
-
 
 
 async function taskOptionSet(e) {
