@@ -79,9 +79,9 @@ async function saveTaskClick(){
     if (selectInput === ''){
     console.log('selected is empty')
     }
-     selectTagId.addEventListener('change',e =>{
+     selectTagId.addEventListener('change',e =>
       selectInput =  e.target.value 
-     });
+     );
 
 // title input get
 // let titleInput = await titleId.value
@@ -146,17 +146,27 @@ const filtertag =[...taskBoxContainer].filter(element =>
  
 
 // select to-do first colum
-  filtertag.forEach( cloums =>{
-  let todoColumn = cloums.querySelector(".task-cloum[data-status = 'to-do']");
-  const taskCard = todoColumn.innerHTML =`<div class="card">${taskName}</div>`//create task cards
+const allChidern = filtertag.flatMap(parent =>
+  Array.from(parent.querySelectorAll('.task-cloum')))
+console.log(allChidern,"all chidern")
+let taskCard  = createTaskCard(taskName);
+console.log(taskCard,"taskCard")
+  allChidern[0].appendChild(taskCard) //create task cards
 
- taskCard.addEventListener()
- close();
-});
+
+//  close();
+//   taskCard.addEventListener('click')
+// });
+
+ }
+
+function createTaskCard(taskName){
+const card = document.createElement('div');
+  card.className ='task-card'
+  card.innerText = taskName;
+  return card;
 
 }
-
-
 
 function updateTaskLocation(){
 
@@ -191,7 +201,9 @@ async function taskOptionSet(e) {
 
 
 
-
+// select to-do first colum
+  // filtertag.forEach( cloums =>{
+  // let todoColumn = cloums.querySelector(".task-cloum[data-status = 'to-do']");
 
 
 
