@@ -148,17 +148,30 @@ const filtertag =[...taskBoxContainer].filter(element =>
 // select to-do first colum
   filtertag.forEach( cloums =>{
   let todoColumn = cloums.querySelector(".task-cloum[data-status = 'to-do']");
-  const taskCard = todoColumn.innerHTML =`<div class="card">${taskName}</div>`
+  const taskCard = todoColumn.innerHTML =`<div class="card">${taskName}</div>`//create task cards
 
- console.log( taskCard,"columnSeclect")
+ taskCard.addEventListener()
  close();
 });
 
 }
 
+
+
+function updateTaskLocation(){
+
+}
+
+
+
+
 function close(){
      taskModel.style.display = 'none';
 }
+
+
+
+
 
 
 async function taskOptionSet(e) {
