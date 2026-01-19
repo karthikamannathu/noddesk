@@ -16,12 +16,12 @@
         
         
 
-            <div class="task-container">
-                <div class="sub-header" >
-                <h3 class="critical">Critical</h3>
+            <div class="task-container" >
+                <div class="header-flex" >
+                <h3 >Critical</h3>
                 <button class="add-task"  id="Critical">+</button>
                 </div>
-                  <div class="input-task-box">
+                  <div id ="input-task-box" class="critical">
                     <div class="task-cloum" data-status ='to-do'></div>
                     <div class="task-cloum" data-status ='in-progress'></div>
                     <div class="task-cloum" data-status ='Done'></div>
@@ -29,12 +29,12 @@
                 </div>
                 
                     
-            <div class="task-container">
-                <div class="sub-header">
-                  <h3 class="issuse-tickets">Issuse-Tickets</h3>
+            <div class="task-container" >
+                <div class="header-flex">
+                  <h3 >Issuse-Tickets</h3>
                   <button class="add-task" id="issuse-tickets">+</button>
                 </div>
-                <div class="input-task-box">
+                <div id ="input-task-box" class="issuse-tickets">
                     <div class="task-cloum" data-status='to-do'></div>
                     <div class="task-cloum" data-status='in-progress'></div>
                     <div class="task-cloum" data-status='Done'></div>
@@ -43,22 +43,22 @@
                 
     
             <div class="task-container">
-                <div class="sub-header">
-                 <h3 class="maintenance">Maintenance</h3>
+                <div class="header-flex">
+                 <h3>Maintenance</h3>
                  <button class="add-task" id="maintenance">+</button>
                 </div>
-                <div class="input-task-box">
+                <div id="input-task-box" class ="maintenance">
                      <div class="task-cloum"data-status='to-do'></div>
                     <div class="task-cloum" data-status ='in-progress'></div>
                     <div class="task-cloum" data-status ='Done'></div>
                 </div>          </div>    
     
             <div class="task-container">
-                <div class="sub-header">
-                    <h3 class="unplanned">Unplanned</h3>
+                <div class="header-flex">
+                    <h3 >Unplanned</h3>
                     <button class="add-task" id="unplaned">+</button>
                 </div>
-                <div class="input-task-box">
+                <div id="input-task-box" class ="unplaned">
                     <div class="task-cloum" data-status ='to-do'></div>
                     <div class="task-cloum" data-status ='in-progress'></div>
                     <div class="task-cloum" data-status ='Done'></div>
@@ -69,7 +69,7 @@
             </div>
         </div>
     </main>
-    <div id="task-modal" class="modal">
+    <div id="task-sumit-modal" class="modal">
     <div class="modal-content">
         <h3>Add New Task</h3>
         <label>Priority / Category</label>
@@ -87,6 +87,7 @@
         </div>
     </div>
 </div>
+<!-- <div id="task-cards"></div> -->
     <script src="./index.js"></script>
 </body>
 </html>

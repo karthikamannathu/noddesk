@@ -1,12 +1,13 @@
 const addTaskButton =  document.querySelectorAll('.add-task');
-const taskBoxInput =  document.querySelectorAll('.task-cloumm');
-const taskModel = document.querySelector('#task-modal');
+const taskBoxCloum =  document.querySelectorAll('.task-cloum');
+const taskModel = document.querySelector('#task-sumit-modal');
 const mainSection = document.querySelector('#main');
 const saveTask = document.querySelector('#save-task');
 const closeModal = document.querySelector('#close-modal');
 const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
 const selectTagId  = document.querySelector('#task-options');
+const taskBox = document.querySelectorAll('#input-task-box')
  
 let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
@@ -48,7 +49,8 @@ function taskCategoryDefaultSet(btnId){
   try {
    taskArray.filter(value => value.toLocaleLowerCase() !== btnId.toLocaleLowerCase())
   // console.log(filterArray,"filterArray")
-  taskArray.unshift(btnId)
+  const defaulTask = `${btnId[0].toUpperCase()}${btnId.slice(1)}`;//convert the id first letter uppercase
+  taskArray.unshift(defaulTask);
 
 // append  selection options
     taskArray.map (data  =>{
@@ -91,8 +93,8 @@ let descInput = await descriptionId.value
 
 saveState(selectInput,titleInput,descInput)
 loadState()
-console.log(saveState,'saveState')
-console.log(loadState,'loadState')
+// console.log(saveState,'saveState')
+// console.log(loadState(),'loadState')
 
 
     } catch (error) {
@@ -102,24 +104,52 @@ console.log(loadState,'loadState')
     }
 
 function saveState(selectInput,titleInput,descInput){
-  console.log('save state is loding')
+ console.log('saveState is loding');
  localStorage.setItem('task',JSON.stringify(selectInput));
  localStorage.setItem('title',JSON.stringify(titleInput));
  localStorage.setItem('description',JSON.stringify(descInput));
+
+//  localStorage.removeItem('Task');
 // localStorage.setItem(storeKey,titleInput);
 // localStorage.setItem(storeKey,descInput);
 }
 
-function loadState(){
-  try{const saveData = localStorage.getItem('Task');
+async function loadState(){
+  try{
+      console.log('loadState loading');
+    const saveData = await JSON.parse(localStorage.getItem('task'));
+
   if(saveData) {
-    console.log(JSON.parse(saveData),"saveData")
+    
+ 
+
+
+  runderBoard(saveData);
+
   }
-  console.log(loadState,'loadState')
+  else{
+
+  }
+
 }catch(error){
 console.error
 }
 }
+
+function runderBoard(saveData) {
+  // get  All input boxs classNames
+
+const allTaskBoxClassName = [...taskBox]
+// console.log(allTaskBoxClassName,'inputboxs')
+const filtertag = allTaskBoxClassName.filter(element =>((element.className).toLocaleLowerCase())
+.includes((saveData).toLocaleLowerCase()))
+  // find the taks store key equal className;
+console.log( filtertag ," filtertag ")
+
+
+
+}
+
 function closeClick(){
     
 }
