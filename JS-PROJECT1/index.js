@@ -84,14 +84,14 @@ async function saveTaskClick(){
      });
 
 // title input get
-let titleInput = await titleId.value
-  if (titleInput === '') {
-     alert('plase add any task')
-  } 
-// describe input get
-let descInput = await descriptionId.value
+// let titleInput = await titleId.value
+//   if (titleInput === '') {
+//      alert('plase add any task')
+//   } 
+// // describe input get
+// let descInput = await descriptionId.value
 
-saveState(selectInput,titleInput,descInput)
+saveState(selectInput)
 loadState()
 // console.log(saveState,'saveState')
 // console.log(loadState(),'loadState')
@@ -103,11 +103,11 @@ loadState()
     
     }
 
-function saveState(selectInput,titleInput,descInput){
+function saveState(selectInput){
  console.log('saveState is loding');
  localStorage.setItem('task',JSON.stringify(selectInput));
- localStorage.setItem('title',JSON.stringify(titleInput));
- localStorage.setItem('description',JSON.stringify(descInput));
+//  localStorage.setItem('title',JSON.stringify(titleInput));
+//  localStorage.setItem('description',JSON.stringify(descInput));
 
 //  localStorage.removeItem('Task');
 // localStorage.setItem(storeKey,titleInput);
@@ -119,11 +119,8 @@ async function loadState(){
       console.log('loadState loading');
     const taskName = await JSON.parse(localStorage.getItem('task'));
 
-  if(saveData) {
-    
- 
-
-
+  if(taskName) {
+console.log('taskName');
   runderBoard(taskName);
 
   }
@@ -136,29 +133,31 @@ console.error
 }
 }
 
-function runderBoard(taskName) {
+ function runderBoard(taskName) {
 // 
 
 
   // get  All input boxs classNames
 
 // find the taks store key equal, className  using element
-const filtertag = [...taskBoxContainer].filter(element =>
+const filtertag =[...taskBoxContainer].filter(element =>
   element.classList.contains((taskName).toLowerCase()
 ));
-  
+ 
 
-// select 
- filtertag.forEach(selection =>{
-  let todoColumn = selection.querySelector(".task-cloum[data-status = 'to-do']");
-      // todoColumn.innerHTML = `<p> the car`
- console.log(todoColumn ,'todoColumn ')
-})
+// select to-do first colum
+  filtertag.forEach( cloums =>{
+  let todoColumn = cloums.querySelector(".task-cloum[data-status = 'to-do']");
+  const taskCard = todoColumn.innerHTML =`<div class="card">${taskName}</div>`
+
+ console.log( taskCard,"columnSeclect")
+ close();
+});
 
 }
 
-function closeClick(){
-    
+function close(){
+     taskModel.style.display = 'none';
 }
 
 
