@@ -7,7 +7,7 @@ const closeModal = document.querySelector('#close-modal');
 const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
 const selectTagId  = document.querySelector('#task-options');
-const taskBox = document.querySelectorAll('#input-task-box')
+const taskBoxContainer = document.querySelectorAll('#task-cloum-container')
  
 let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
@@ -47,7 +47,7 @@ function taskCategoryDefaultSet(btnId){
   // ckeck array include the current btn task
 
   try {
-   taskArray.filter(value => value.toLocaleLowerCase() !== btnId.toLocaleLowerCase())
+   taskArray.filter(value => value.toLowerCase() !== btnId)
   // console.log(filterArray,"filterArray")
   const defaulTask = `${btnId[0].toUpperCase()}${btnId.slice(1)}`;//convert the id first letter uppercase
   taskArray.unshift(defaulTask);
@@ -117,14 +117,14 @@ function saveState(selectInput,titleInput,descInput){
 async function loadState(){
   try{
       console.log('loadState loading');
-    const saveData = await JSON.parse(localStorage.getItem('task'));
+    const taskName = await JSON.parse(localStorage.getItem('task'));
 
   if(saveData) {
     
  
 
 
-  runderBoard(saveData);
+  runderBoard(taskName);
 
   }
   else{
@@ -136,19 +136,24 @@ console.error
 }
 }
 
-function runderBoard(saveData) {
+function runderBoard(taskName) {
+// 
+
+
   // get  All input boxs classNames
 
-const allTaskBoxClassName = [...taskBox]
-// console.log(allTaskBoxClassName,'inputboxs')
-const filtertag = allTaskBoxClassName.filter(element =>((element.className).toLocaleLowerCase())
-.includes((saveData).toLocaleLowerCase()))
-  // find the taks store key equal className;
- 
-document.parentElement(filtertag)
-console.log(document.childElementCount(filtertag)," filtertag  taskcolum")
+// find the taks store key equal, className  using element
+const filtertag = [...taskBoxContainer].filter(element =>
+  element.classList.contains((taskName).toLowerCase()
+));
+  
 
-
+// select 
+ filtertag.forEach(selection =>{
+  let todoColumn = selection.querySelector(".task-cloum[data-status = 'to-do']");
+      // todoColumn.innerHTML = `<p> the car`
+ console.log(todoColumn ,'todoColumn ')
+})
 
 }
 
