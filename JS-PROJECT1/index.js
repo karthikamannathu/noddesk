@@ -144,7 +144,9 @@ const allTaskBoxClassName = [...taskBox]
 const filtertag = allTaskBoxClassName.filter(element =>((element.className).toLocaleLowerCase())
 .includes((saveData).toLocaleLowerCase()))
   // find the taks store key equal className;
-console.log( filtertag ," filtertag ")
+ 
+document.parentElement(filtertag)
+console.log(document.childElementCount(filtertag)," filtertag  taskcolum")
 
 
 
