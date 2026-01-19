@@ -157,6 +157,7 @@ console.log(taskCard,"taskCard")
 //  close();
 //   taskCard.addEventListener('click')
 // });
+close();
 
  }
 
