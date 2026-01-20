@@ -15,9 +15,16 @@ let storeKey = 'UserTask';
 
 
 
+function addNewTask () {
+addTaskButton.forEach(btn =>
+  btn.addEventListener("click",addTaskClick)
+)
+}
 
-
-
+function addTaskClick (e) {
+  const buttonId = e.target.id;
+  console.log(buttonId,"buttonId")
+}
 
 
 
