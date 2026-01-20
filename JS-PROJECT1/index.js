@@ -11,7 +11,7 @@ const taskBoxContainer = document.querySelectorAll('#task-cloum-container')
  
 let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
-
+let buttonId = '';
 
  addNewTask ();
 
@@ -23,8 +23,9 @@ addTaskButton.forEach(btn =>
 }
 
 function addTaskClick(e) {
-  const buttonId = e.target.id;
-  console.log(buttonId,"buttonId")
+   buttonId = e.target.id;
+// console.log(buttonId,"buttonId")
+
 }
 
 
