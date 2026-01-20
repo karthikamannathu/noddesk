@@ -23,9 +23,10 @@ function addNewTask () {
     addTaskButton.forEach(btn =>
       btn.addEventListener("click",(e) =>{
          selectedTask = e.target.id
-    console.log("buttonId",selectedTask)
+    // console.log("buttonId",selectedTask)
   if(selectedTask){
-      taskCreation(selectedTask)
+    taskOptionsCreation();
+    getallInputs();
     }}) 
     );
     
@@ -36,7 +37,10 @@ function addNewTask () {
 }
 
 
-function taskCreation(selectedTask){
+
+
+
+function taskOptionsCreation(){
 
   // enable the task submit Model-div
    taskModel.style.display ='flex';
@@ -60,20 +64,41 @@ allmodifyedTaskArray.map(task =>{
    selectElement.appendChild(taskOptions);
 });
 
-   
-   
-  //  taskOptions.remove()
-
 }
 
+
+
+async function getallInputs(){
+ try{
+
+  // get taskCategory Inputs
+  let taskCategoryInput = await selectElement.value;
+  selectElement.addEventListener('change',e =>{
+      taskCategoryInput =  e.target.value;
+    return taskCategoryInput
+  });
+saveState(taskCategoryInput)
+
+    } catch(error){
+      console.error
+    }
+ console.log( taskCategoryInput,"selectElement.value")
+}
 
 //  add task button click time remove the option/doument
 
 
+function saveState(CategoryInput){
+localStorage.setItem('task',JSON.stringify(CategoryInput))
+
+}
 
 
 
-
+function loadState() {
+ const taskCategory =JSON.parse(localStorage.getItem('task'))
+ runderBoard(taskCategory)
+}
 
 
 
