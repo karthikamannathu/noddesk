@@ -13,15 +13,16 @@ let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
 
 
-
+ addNewTask ();
 
 function addNewTask () {
 addTaskButton.forEach(btn =>
   btn.addEventListener("click",addTaskClick)
+  
 )
 }
 
-function addTaskClick (e) {
+function addTaskClick(e) {
   const buttonId = e.target.id;
   console.log(buttonId,"buttonId")
 }
