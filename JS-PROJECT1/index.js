@@ -9,9 +9,9 @@ const descriptionId = document.getElementById('task-description');
 const selectElement  = document.querySelector('#task-options');
 const taskBoxContainer = document.querySelectorAll('#task-cloum-container')
  
-let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
+let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
-let SelectedTask = '';
+let selectedTask = '';
 
  addNewTask ();
 
@@ -21,10 +21,10 @@ function addNewTask () {
     // Clicked buttonId get
     addTaskButton.forEach(btn =>
       btn.addEventListener("click",(e) =>{
-         SelectedTask = e.target.id
-    console.log("buttonId",SelectedTask)
-  if(SelectedTask){
-      taskCreation(SelectedTask)
+         selectedTask = e.target.id
+    console.log("buttonId",selectedTask)
+  if(selectedTask){
+      taskCreation(selectedTask)
     }}) 
     );
     
@@ -35,17 +35,26 @@ function addNewTask () {
 }
 
 
-function taskCreation(SelectedTask){
+function taskCreation(selectedTask){
 
   // enable the task submit Model-div
    taskModel.style.display ='flex';
+
   //  add task category in modal- selection element
+
+    const  defaultOption = `${selectedTask[0].toUpperCase()}
+    ${selectedTask.slice(1)}`;//covert to firstletter capitlize
+   
+    // Modify Array 
+    let modifyedTaskArray = 
+
+
   let taskOptions = document.createElement('option');
-   taskOptions.value = SelectedTask;
-   taskOptions.textContent = SelectedTask;
+   taskOptions.value =  defaultOption;
+   taskOptions.textContent = defaultOption;
    selectElement.appendChild(taskOptions);
    
-    console.log(  SelectedTask," SelectedTask")
+   console.log( selectElement.innerHTML,"selectElement")
 
 }
 
