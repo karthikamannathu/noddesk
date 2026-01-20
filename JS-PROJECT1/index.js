@@ -7,7 +7,7 @@ const closeModal = document.querySelector('#close-modal');
 const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
 const selectElement  = document.querySelector('#task-options');
-const taskBoxContainer = document.querySelectorAll('#task-cloum-container')
+const allSwimlanes = document.querySelectorAll('#swimlane-task ')
  
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
@@ -16,13 +16,14 @@ let  allmodifyedTaskArray = []
 
  addNewTask ();
 
-function addNewTask () {
+function addNewTask (){
   try {
     
     // Clicked buttonId get
     addTaskButton.forEach(btn =>
       btn.addEventListener("click",(e) =>{
          selectedTask = e.target.id
+
     // console.log("buttonId",selectedTask)
   if(selectedTask){
     taskOptionsCreation();
@@ -55,9 +56,10 @@ function taskOptionsCreation(){
   //Array reset and push first default task
      allmodifyedTaskArray.unshift(defaultOption)
      console.log("modifyarray", allmodifyedTaskArray)
-
+ selectElement.innerHTML = '';
       // create all options
 allmodifyedTaskArray.map(task =>{
+ 
    let taskOptions = document.createElement('option');
    taskOptions.value = task;
    taskOptions.textContent = task;
@@ -82,9 +84,8 @@ saveState(taskCategoryInput)
     } catch(error){
       console.error
     }
- console.log( taskCategoryInput,"selectElement.value")
-}
 
+}
 //  add task button click time remove the option/doument
 
 
@@ -94,14 +95,22 @@ localStorage.setItem('task',JSON.stringify(CategoryInput))
 }
 
 
+loadState() 
 
 function loadState() {
- const taskCategory =JSON.parse(localStorage.getItem('task'))
- runderBoard(taskCategory)
+ const taskCategory = JSON.parse(localStorage.getItem('task'));
+ 
+ runderBoard(taskCategory);
 }
-
-
-function runderBoard(){
+ runderBoard()
+// find current swimlane and colum
+function runderBoard(taskCategory){
+// const selectedSwimlane = [...allSwimlanes].filter(element =>{
+  // element.className.contains((taskCategory))
+// })
+// console.log([...allSwimlanes].forEach(element =>
+//   element.innerHTML
+// ),"selectedSwimlane")
   
 }
 
