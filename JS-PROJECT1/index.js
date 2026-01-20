@@ -15,161 +15,182 @@ let storeKey = 'UserTask';
 
 
 
-try {
-       addTaskButton.forEach(  button => {
-     button.addEventListener('click', async(e) =>{
-       
-         let buttonId = await e.target.id;
-        //  console.log(e.target,'e.target')
-        //  taskModel.dataset.activeCategory = await categoryId;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// addTask()
+
+// function addTask (){
+// try {
+//        addTaskButton.forEach(  button => {
+//      button.addEventListener('click', (e) =>{
+//        console.log('add button click')
+//          let buttonId = e.target.id;
+//         //  console.log(e.target,'e.target')
+//         //  taskModel.dataset.activeCategory = await categoryId;
          
-         if  (buttonId ) {
+        
+        
+//         if  (buttonId ) {
+//              taskModel.style.display = 'flex';
+//              mainSection.setAttribute('inert','');
+//              mainSection.style.opacity = '.4';
+//              mainSection.style.pointerEvents = 'none';
 
-         taskModel.style.display = 'flex';
-          if (taskModel.style.display != 'none') {
-             mainSection.setAttribute('inert','');
-             mainSection.style.opacity = '.4';
-            mainSection.style.pointerEvents = 'none';
-             taskModel.style.display = 'flex';
-          } 
-            //   mainSection.setAttribute('inert','');
-            //  mainSection.style.opacity = '.4';
-            //  mainSection.style.pointerEvents = 'none';
-            //  taskModel.style.display = 'flex';
-             taskCategoryDefaultSet(buttonId);
+//              taskCategoryDefaultSet(buttonId);
              
-            // console.log( 'buttonId',buttonId)
-             saveTask.addEventListener('click',saveTaskClick)
-            // closeModal.addEventListener('click',closeClick)
-            // taskOptionsInputs.addEventListener('click',taskOptionClick)
-        } })
-    });
+//             // console.log( 'buttonId',buttonId)
+//              saveTask.addEventListener('click',saveTaskClick)
+//             // closeModal.addEventListener('click',closeClick)
+//             // taskOptionsInputs.addEventListener('click',taskOptionClick)
+//         } })
+//     });
     
-   } catch (error) {
-    console.log(error)};
+//    } catch (error) {
+//     console.log(error)};
+
+//    }
 
 
-
-
-function taskCategoryDefaultSet(btnId){
-  // ckeck array include the current btn task
-
-  try {
-   taskArray.filter(value => value.toLowerCase() !== btnId)
-  // console.log(filterArray,"filterArray")
-  const defaulTask = `${btnId[0].toUpperCase()}${btnId.slice(1)}`;//convert the id first letter uppercase
-  taskArray.unshift(defaulTask);
-
-// append  selection options
-    taskArray.map (data  =>{
-      const taskOptions = document.createElement('option');
-       taskOptions.textContent = data;
-      taskOptions.value = data;
-      selectTagId.appendChild(taskOptions)
-      });
+// function taskCategoryDefaultSet(btnId){
+//   // ckeck array include the current btn task
+//   try {
+//    const filterArray = taskArray.filter(value => value.toLowerCase() != btnId)
+//    console.log( filterArray,"filterArray")
+//   const defaulTask = `${btnId[0].toUpperCase()}${btnId.slice(1)}`;//convert the id first letter uppercase
+//  filterArray.unshift(defaulTask);
+//  const taskOptions = document.createElement('option');
+// // append  selection options
+//     filterArray.map (data  =>{
+     
+//        taskOptions.textContent = data;
+//       taskOptions.value = data;
+//       selectTagId.appendChild(taskOptions)
+//       });
 
 
 
 
     
-  } catch (error) {
-  console.log(error)
-  }}
+//   } catch (error) {
+//   console.log(error)
+//   }}
 
 
 
 
 
-async function saveTaskClick(){
- try {
-  // category selection input
-   let selectInput = await selectTagId.value;
-    if (selectInput === ''){
-    console.log('selected is empty')
-    }
-     selectTagId.addEventListener('change',e =>
-      selectInput =  e.target.value 
-     );
+// async function saveTaskClick(){
+//  try {
+//   // category selection input
+//    let selectInput = await selectTagId.value;
+//     if (selectInput === ''){
+//     console.log('selected is empty')
+//     }
+//      selectTagId.addEventListener('change',e =>
+//       selectInput =  e.target.value 
+//      );
 
-// title input get
-// let titleInput = await titleId.value
-//   if (titleInput === '') {
-//      alert('plase add any task')
-//   } 
-// // describe input get
-// let descInput = await descriptionId.value
-
-saveState(selectInput)
-loadState()
-// console.log(saveState,'saveState')
-// console.log(loadState(),'loadState')
+// // title input get
 
 
-    } catch (error) {
-      console.error
-    } 
+// saveState(selectInput)
+// loadState()
+// // console.log(saveState,'saveState')
+// // console.log(loadState(),'loadState')
+
+
+//     } catch (error) {
+//       console.error
+//     } 
     
-    }
+//     }
 
-function saveState(selectInput){
- console.log('saveState is loding');
- localStorage.setItem('task',JSON.stringify(selectInput));
+// function saveState(selectInput){
+//  console.log('saveState is loding');
+//  localStorage.setItem('task',JSON.stringify(selectInput));
 
-//  localStorage.setItem('title',JSON.stringify(titleInput));
-//  localStorage.setItem('description',JSON.stringify(descInput));
+// //  localStorage.setItem('title',JSON.stringify(titleInput));
+// //  localStorage.setItem('description',JSON.stringify(descInput));
 
-//  localStorage.removeItem('Task');
+// //  localStorage.removeItem('Task');
 
-}
+// }
 
-async function loadState(){
-  try{
-      console.log('loadState loading');
-    const taskName = await JSON.parse(localStorage.getItem('task'));
+// async function loadState(){
+//   try{
+//       console.log('loadState loading');
+//     const taskName = await JSON.parse(localStorage.getItem('task'));
 
-  if(taskName) {
-console.log('taskName');
-  runderBoard(taskName);
+//   if(taskName) {
+// console.log('taskName');
+//   runderBoard(taskName);
 
-  }
-  else{
+//   }
+//   else{
 
-  }
+//   }
 
-}catch(error){
-console.error
-}
-}
+// }catch(error){
+// console.error
+// }
+// }
 
- function runderBoard(taskName) {
-  // get  All input boxs classNames
+//  function runderBoard(taskName) {
+//   // get  All input boxs classNames
 
-// find the taks store key equal, className  using element
-const filtertag =[...taskBoxContainer].filter(element =>
-  element.classList.contains((taskName).toLowerCase()
-));
+// // find the taks store key equal, className  using element
+// const filtertag =[...taskBoxContainer].filter(element =>
+//   element.classList.contains((taskName).toLowerCase()
+// ));
  
-
-// select to-do first colum
-const allChidern = filtertag.flatMap(parent =>
-  Array.from(parent.querySelectorAll('.task-cloum')))
-console.log(allChidern,"all chidern")
-let taskCard  = createTaskCard(taskName);
-console.log(taskCard,"taskCard")
-  allChidern[0].appendChild(taskCard) //create task cards
-
+// // select to-do first colum
+// const allChidern = filtertag.flatMap(parent =>
+//   Array.from(parent.querySelectorAll('.task-cloum')))
+// console.log(allChidern,"all chidern")
+// let taskCard  = createTaskCard(taskName);
+// console.log(taskCard,"taskCard")
+//   allChidern[0].appendChild(taskCard) //create task cards
 
 
-close(); }
 
-function createTaskCard(taskName){
-const card = document.createElement('div');
-  card.className ='task-card'
-  card.innerText = taskName;
-  return card;
+// close(); }
 
-}
+// function createTaskCard(taskName){
+// const card = document.createElement('div');
+//   card.className ='task-card'
+//   card.innerText = taskName;
+//   return card;
 
+// }
 
 
 
@@ -177,19 +198,23 @@ const card = document.createElement('div');
 
 
 
-function updateTaskLocation(){
 
-}
+// function updateTaskLocation(){
 
-function close(){
-     taskModel.style.display = 'none';
+// }
 
-}
+// function close(){
+//     taskModel.style.display = 'none';
+//     mainSection.removeAttribute('inert');
+//     mainSection.style.opacity = '1';
+//     mainSection.style.pointerEvents = 'auto';
+     
+// }
 
 
-async function taskOptionSet(e) {
+// async function taskOptionSet(e) {
     
-}
+// }
 
 
 
