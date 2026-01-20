@@ -12,6 +12,7 @@ const taskBoxContainer = document.querySelectorAll('#task-cloum-container')
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
 let selectedTask = '';
+let  allmodifyedTaskArray = []
 
  addNewTask ();
 
@@ -42,24 +43,31 @@ function taskCreation(selectedTask){
 
   //  add task category in modal- selection element
 
-    const  defaultOption = `${selectedTask[0].toUpperCase()}
-    ${selectedTask.slice(1)}`;//covert to firstletter capitlize
+    const  defaultOption = `${selectedTask[0].toUpperCase()}${
+    selectedTask.slice(1)}`;//covert to firstletter capitlize
    
     // Modify Array 
-    let modifyedTaskArray = 
+   allmodifyedTaskArray = taskArray.filter(value=> value != defaultOption)
+  //Array reset and push first default task
+     allmodifyedTaskArray.unshift(defaultOption)
+     console.log("modifyarray", allmodifyedTaskArray)
 
-
-  let taskOptions = document.createElement('option');
-   taskOptions.value =  defaultOption;
-   taskOptions.textContent = defaultOption;
+      // create all options
+allmodifyedTaskArray.map(task =>{
+   let taskOptions = document.createElement('option');
+   taskOptions.value = task;
+   taskOptions.textContent = task;
    selectElement.appendChild(taskOptions);
+});
+
    
-   console.log( selectElement.innerHTML,"selectElement")
+   
+  //  taskOptions.remove()
 
 }
 
 
-
+//  add task button click time remove the option/doument
 
 
 
