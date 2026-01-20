@@ -6,12 +6,12 @@ const saveTask = document.querySelector('#save-task');
 const closeModal = document.querySelector('#close-modal');
 const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
-const selectElementId  = document.querySelector('#task-options');
+const selectElement  = document.querySelector('#task-options');
 const taskBoxContainer = document.querySelectorAll('#task-cloum-container')
  
 let taskArray = ["Critical","Issuse-Tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
-let buttonId = '';
+let SelectedTask = '';
 
  addNewTask ();
 
@@ -21,28 +21,31 @@ function addNewTask () {
     // Clicked buttonId get
     addTaskButton.forEach(btn =>
       btn.addEventListener("click",(e) =>{
-        buttonId = e.target.id
-    console.log("buttonId",buttonId)}
-      ) 
+         SelectedTask = e.target.id
+    console.log("buttonId",SelectedTask)
+  if(SelectedTask){
+      taskCreation(SelectedTask)
+    }}) 
     );
     
-    if(!buttonId){
-      taskCreation(buttonId)
-    }else(
-      console.log('buttonId not get!...')
-    )
+    
   } catch (error) {
     console.error
   }
 }
 
 
-function taskCreation(buttonId){
+function taskCreation(SelectedTask){
 
   // enable the task submit Model-div
-  taskModel.style.display ='flex';
+   taskModel.style.display ='flex';
   //  add task category in modal- selection element
-  
+  let taskOptions = document.createElement('option');
+   taskOptions.value = SelectedTask;
+   taskOptions.textContent = SelectedTask;
+   selectElement.appendChild(taskOptions);
+   
+    console.log(  SelectedTask," SelectedTask")
 
 }
 
