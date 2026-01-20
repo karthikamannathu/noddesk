@@ -16,18 +16,38 @@ let buttonId = '';
  addNewTask ();
 
 function addNewTask () {
-addTaskButton.forEach(btn =>
-  btn.addEventListener("click",addTaskClick)
+  try {
+    
+    // Clicked buttonId get
+    addTaskButton.forEach(btn =>
+      btn.addEventListener("click",(e) =>{
+        buttonId = e.target.id
+    console.log("buttonId",buttonId)}
+      ) 
+    );
+    
+    if(!buttonId){
+      taskCreation(buttonId)
+    }else(
+      console.log('buttonId not get!...')
+    )
+    
+
+  } catch (error) {
+    
+  }
+
+
+}
+
+
+function taskCreation(buttonId){
+
+  // enable the task submit Model-div
+  taskModel.style.display ='flex';
   
-)
-}
-
-function addTaskClick(e) {
-   buttonId = e.target.id;
-// console.log(buttonId,"buttonId")
 
 }
-
 
 
 
