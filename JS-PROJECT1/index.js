@@ -99,7 +99,7 @@ function loadState() {
 }
 
 // find current swimlane and colum
-function runderBoard(taskCategory){
+async function runderBoard(taskCategory){
   try {
     const selectedSwimlane = Array.from(allSwimlanes).filter(element => 
     element.classList.contains(taskCategory?.toLowerCase()))
@@ -108,12 +108,17 @@ function runderBoard(taskCategory){
       const allChidern = selectedSwimlane.flatMap(parent =>
  Array.from(parent.querySelectorAll('.task-cloum'))) 
 //  console.log(allChidern,"all chidern")
-    let taskCard  = createTaskCard(taskCategory);
+    let taskCard  =  createTaskCard(taskCategory);
 //  console.log(taskCard,"taskCard")
+taskCard.addEventListener('dragstart',dragstart)
   allChidern[0].appendChild(taskCard)
   if (allChidern[0]!='') {
     console.alert('plase change privious task status')
   }
+
+  taskCard
+
+
     }
   } catch (error) {
     
@@ -130,7 +135,9 @@ const card = document.createElement('div');
 }
 
 
-
+function dragstart(e) {
+  
+}
 
 
 
