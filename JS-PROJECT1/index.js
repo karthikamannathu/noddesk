@@ -12,8 +12,8 @@ const allSwimlanes = document.querySelectorAll('#swimlane-task ')
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
 let selectedTask = '';
-let  allmodifyedTaskArray = []
 
+ 
  addNewTask ();
 
 function addNewTask (){
@@ -44,18 +44,17 @@ function addNewTask (){
 function taskOptionsCreation(){
 
   // enable the task submit Model-div
-   taskModel.style.display ='flex';
+ taskModel.style.display ='flex';
 
   //  add task category in modal- selection element
 
-    const  defaultOption = `${selectedTask[0].toUpperCase()}${
-    selectedTask.slice(1)}`;//covert to firstletter capitlize
-   
+  const  defaultOption = `${selectedTask[0].toUpperCase()}${
+  selectedTask.slice(1)}`;//covert to firstletter capitlize 
     // Modify Array 
-   allmodifyedTaskArray = taskArray.filter(value=> value != defaultOption)
+ let allmodifyedTaskArray = taskArray.filter(value=> value != defaultOption)
   //Array reset and push first default task
-     allmodifyedTaskArray.unshift(defaultOption)
-     console.log("modifyarray", allmodifyedTaskArray)
+ allmodifyedTaskArray.unshift(defaultOption)
+    
  selectElement.innerHTML = '';
       // create all options
 allmodifyedTaskArray.map(task =>{
@@ -65,9 +64,7 @@ allmodifyedTaskArray.map(task =>{
    taskOptions.textContent = task;
    selectElement.appendChild(taskOptions);
 });
-
 }
-
 
 
 async function getallInputs(){
@@ -79,7 +76,7 @@ async function getallInputs(){
       taskCategoryInput =  e.target.value;
     return taskCategoryInput
   });
-saveState(taskCategoryInput)
+   saveState(taskCategoryInput)
 
     } catch(error){
       console.error
@@ -87,7 +84,6 @@ saveState(taskCategoryInput)
 
 }
 //  add task button click time remove the option/doument
-
 
 function saveState(CategoryInput){
 localStorage.setItem('task',JSON.stringify(CategoryInput))
@@ -99,23 +95,39 @@ loadState()
 
 function loadState() {
  const taskCategory = JSON.parse(localStorage.getItem('task'));
- 
  runderBoard(taskCategory);
 }
- runderBoard()
+
 // find current swimlane and colum
 function runderBoard(taskCategory){
-// const selectedSwimlane = [...allSwimlanes].filter(element =>{
-  // element.className.contains((taskCategory))
-// })
-// console.log([...allSwimlanes].forEach(element =>
-//   element.innerHTML
-// ),"selectedSwimlane")
-  
+  try {
+    const selectedSwimlane = Array.from(allSwimlanes).filter(element => 
+    element.classList.contains(taskCategory?.toLowerCase()))
+    // console.log("selectedSwimlane",selectedSwimlane)
+    if(selectedSwimlane){
+      const allChidern = selectedSwimlane.flatMap(parent =>
+ Array.from(parent.querySelectorAll('.task-cloum'))) 
+//  console.log(allChidern,"all chidern")
+    let taskCard  = createTaskCard(taskCategory);
+//  console.log(taskCard,"taskCard")
+  allChidern[0].appendChild(taskCard)
+  if (allChidern[0]!='') {
+    console.alert('plase change privious task status')
+  }
+    }
+  } catch (error) {
+    
+  }
 }
 
 
+function createTaskCard(taskName){
+const card = document.createElement('div');
+  card.className ='task-card'
+  card.innerText = taskName;
+  return card;
 
+}
 
 
 
@@ -266,14 +278,7 @@ function runderBoard(taskCategory){
 
 // close(); }
 
-// function createTaskCard(taskName){
-// const card = document.createElement('div');
-//   card.className ='task-card'
-//   card.innerText = taskName;
-//   return card;
-
-// }
-
+// 
 
 
 
