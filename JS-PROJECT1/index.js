@@ -76,8 +76,9 @@ async function getallInputs(){
       taskCategoryInput =  e.target.value;
     return taskCategoryInput
   });
-   saveState(taskCategoryInput)
+   saveState(taskCategoryInput);
 
+loadState();
     } catch(error){
       console.error
     }
@@ -90,8 +91,7 @@ localStorage.setItem('task',JSON.stringify(CategoryInput))
 
 }
 
-
-loadState() 
+ 
 
 function loadState() {
  const taskCategory = JSON.parse(localStorage.getItem('task'));
