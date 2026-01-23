@@ -8,6 +8,7 @@ const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
 const selectElement  = document.querySelector('#task-options');
 const allSwimlanes = document.querySelectorAll('#swimlane-task ')
+const cardEdit = document.querySelector('.card-edit');
  
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
@@ -18,7 +19,6 @@ let selectedTask = '';
 
 function addNewTask (){
   try {
-    
     // Clicked buttonId get
     addTaskButton.forEach(btn =>
       btn.addEventListener("click",(e) =>{
@@ -26,25 +26,24 @@ function addNewTask (){
 
     // console.log("buttonId",selectedTask)
   if(selectedTask){
+      // enable the task submit Model-div
+             taskModel.style.display ='flex';
+             mainSection.setAttribute('inert','');
+             mainSection.style.opacity = '-10';
+             mainSection.style.color = 'rgb(40, 38, 38)';
+             mainSection.style.pointerEvents = 'none';
     taskOptionsCreation();
     getallInputs();
     }}) 
     );
-    
-    
   } catch (error) {
     console.error
   }
 }
 
-
-
-
-
 function taskOptionsCreation(){
 
-  // enable the task submit Model-div
- taskModel.style.display ='flex';
+
 
   //  add task category in modal- selection element
 
@@ -58,7 +57,6 @@ function taskOptionsCreation(){
  selectElement.innerHTML = '';
       // create all options
 allmodifyedTaskArray.map(task =>{
- 
    let taskOptions = document.createElement('option');
    taskOptions.value = task;
    taskOptions.textContent = task;
@@ -69,7 +67,6 @@ allmodifyedTaskArray.map(task =>{
 
 async function getallInputs(){
  try{
-
   // get taskCategory Inputs
   let taskCategoryInput = await selectElement.value;
   selectElement.addEventListener('change',e =>{
@@ -77,8 +74,7 @@ async function getallInputs(){
     return taskCategoryInput
   });
    saveState(taskCategoryInput);
-
-loadState();
+    loadState();
     } catch(error){
       console.error
     }
@@ -88,62 +84,72 @@ loadState();
 
 function saveState(CategoryInput){
 localStorage.setItem('task',JSON.stringify(CategoryInput))
-
+// close();
 }
 
  
 
 function loadState() {
  const taskCategory = JSON.parse(localStorage.getItem('task'));
+ console.log("loadState loading...")
  runderBoard(taskCategory);
 }
 
 // find current swimlane and colum
-async function runderBoard(taskCategory){
+async function runderBoard(task){
   try {
-    const selectedSwimlane = Array.from(allSwimlanes).filter(element => 
-    element.classList.contains(taskCategory?.toLowerCase()))
-    // console.log("selectedSwimlane",selectedSwimlane)
-    if(selectedSwimlane){
-      const allChidern = selectedSwimlane.flatMap(parent =>
- Array.from(parent.querySelectorAll('.task-cloum'))) 
-//  console.log(allChidern,"all chidern")
-    let taskCard  =  createTaskCard(taskCategory);
-//  console.log(taskCard,"taskCard")
-taskCard.addEventListener('dragstart',dragstart)
-  allChidern[0].appendChild(taskCard)
-  if (allChidern[0]!='') {
-    console.alert('plase change privious task status')
-  }
+     console.log("runderBord loading...")
+   const swimlane = document.querySelector(`.swimlane-task.${task.toLowerCase()}`);
+    const cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
+    // console.logg( ," cloumn");
 
-  taskCard
-
-
+    if(cloumn){
+      const taskCard = createTaskCard(task);
+      cloumn.appendChild(taskCard);
     }
   } catch (error) {
-    
-  }
+    console.error;
+    }
 }
 
 
-function createTaskCard(taskName){
+function createTaskCard(taskData){
 const card = document.createElement('div');
-  card.className ='task-card'
-  card.innerText = taskName;
-  return card;
+  card.Id = taskData;
+  card.innerText = taskData;
+  card.draggable = true;
+  card.addEventListener('mouseover',createPannel)
+  // card.innerHTML =`<div><div class="pannel"><button class="card-edit">edit</button>
+  //                  <button class ="card-close">close</button></div></div>`
+   card.addEventListener('dragstart',dragstart)
+    return card;
+}
+function createPannel() {
+ card.style.display.opacity ='-1' ;
+card.innerHTML =`<div><div class="pannel"><button class="card-edit">edit</button>
+                   <button class ="card-close">close</button></div></div>`
+                   cardEdit.addEventListener('click',(e)=>{
+                    taskModel.style.display = 'flex'
+                   const taskEditDiv= taskModel.querySelector('.modal-content[h3]');
+                   console.log(taskEditDiv,"taskEditDiv")
+                   })
 
 }
 
+function updateTaskLocation() { 
+}
 
-function dragstart(e) {
-  
+function dragstart(e) { 
 }
 
 
-
-
-
-
+function close(){
+    taskModel.style.display = 'none';
+    mainSection.removeAttribute('inert');
+    mainSection.style.opacity = '1';
+    mainSection.style.pointerEvents = 'auto';
+     
+}
 
 
 
@@ -297,13 +303,7 @@ function dragstart(e) {
 
 // }
 
-// function close(){
-//     taskModel.style.display = 'none';
-//     mainSection.removeAttribute('inert');
-//     mainSection.style.opacity = '1';
-//     mainSection.style.pointerEvents = 'auto';
-     
-// }
+
 
 
 // async function taskOptionSet(e) {
