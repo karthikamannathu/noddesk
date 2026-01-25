@@ -90,9 +90,13 @@ justify-content:space-between;
     margin: 15px;
 }
 
-.task-card{
+.task-cards{
     width: 280px;
     height: 80px;
-    background-color: blue;
+    background-color: rgb(29, 29, 177);
     border-radius: 15px;
+}
+.pannel{
+   float: right;
+  
 }

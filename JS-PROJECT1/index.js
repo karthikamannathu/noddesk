@@ -16,24 +16,23 @@ let selectedTask = '';
 
  
  addNewTask ();
-
+saveTask.addEventListener('click',getallInputs)
 function addNewTask (){
   try {
     // Clicked buttonId get
     addTaskButton.forEach(btn =>
       btn.addEventListener("click",(e) =>{
-         selectedTask = e.target.id
-
+         selectedTask = e.target.id;
     // console.log("buttonId",selectedTask)
   if(selectedTask){
       // enable the task submit Model-div
-             taskModel.style.display ='flex';
+           taskModel.style.display ='flex';
+          
              mainSection.setAttribute('inert','');
-             mainSection.style.opacity = '-10';
-             mainSection.style.color = 'rgb(40, 38, 38)';
+             mainSection.style.opacity = '.5';
+             mainSection.style.color = 'rgb(18, 18, 18)';
              mainSection.style.pointerEvents = 'none';
-    taskOptionsCreation();
-    getallInputs();
+           taskOptionsCreation();
     }}) 
     );
   } catch (error) {
@@ -42,8 +41,6 @@ function addNewTask (){
 }
 
 function taskOptionsCreation(){
-
-
 
   //  add task category in modal- selection element
 
@@ -56,7 +53,7 @@ function taskOptionsCreation(){
     
  selectElement.innerHTML = '';
       // create all options
-allmodifyedTaskArray.map(task =>{
+   allmodifyedTaskArray.map(task =>{
    let taskOptions = document.createElement('option');
    taskOptions.value = task;
    taskOptions.textContent = task;
@@ -66,16 +63,17 @@ allmodifyedTaskArray.map(task =>{
 
 
 async function getallInputs(){
- try{
+ try{ 
   // get taskCategory Inputs
   let taskCategoryInput = await selectElement.value;
   selectElement.addEventListener('change',e =>{
       taskCategoryInput =  e.target.value;
     return taskCategoryInput
   });
-   saveState(taskCategoryInput);
-    loadState();
-    } catch(error){
+  
+     saveState( taskCategoryInput )
+
+   } catch(error){
       console.error
     }
 
@@ -83,67 +81,116 @@ async function getallInputs(){
 //  add task button click time remove the option/doument
 
 function saveState(CategoryInput){
+// console.log('runing savestate...')
+close();
 localStorage.setItem('task',JSON.stringify(CategoryInput))
-// close();
+loadState()
 }
 
  
 
 function loadState() {
  const taskCategory = JSON.parse(localStorage.getItem('task'));
- console.log("loadState loading...")
+  //  console.log( taskCategory," taskCategory");
+//  console.log("loadState loading...",JSON.parse(localStorage.getItem('task')));
  runderBoard(taskCategory);
+//  close();
 }
 
 // find current swimlane and colum
 async function runderBoard(task){
   try {
-     console.log("runderBord loading...")
-   const swimlane = document.querySelector(`.swimlane-task.${task.toLowerCase()}`);
-    const cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
-    // console.logg( ," cloumn");
+    // console.log(task,"runderBoard task")
+    const swimlane = document.querySelector(`.swimlane-task.${task.toLowerCase()}`);
+    let cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
+    // console.log("runderBord loading..." ,cloumn)
+  //  console.log(createTaskCard(),"cloun append")
 
     if(cloumn){
-      const taskCard = createTaskCard(task);
+      let taskCard = createTaskCard(task);    
       cloumn.appendChild(taskCard);
+      console.log(cloumn,"cloun append")
     }
+
+
+
+
   } catch (error) {
     console.error;
     }
 }
 
-
-function createTaskCard(taskData){
+function createTaskCard(task){
+  console.log(task,"   taskData")
 const card = document.createElement('div');
-  card.Id = taskData;
-  card.innerText = taskData;
-  card.draggable = true;
-  card.addEventListener('mouseover',createPannel)
-  // card.innerHTML =`<div><div class="pannel"><button class="card-edit">edit</button>
-  //                  <button class ="card-close">close</button></div></div>`
-   card.addEventListener('dragstart',dragstart)
-    return card;
-}
-function createPannel() {
- card.style.display.opacity ='-1' ;
-card.innerHTML =`<div><div class="pannel"><button class="card-edit">edit</button>
-                   <button class ="card-close">close</button></div></div>`
-                   cardEdit.addEventListener('click',(e)=>{
-                    taskModel.style.display = 'flex'
-                   const taskEditDiv= taskModel.querySelector('.modal-content[h3]');
-                   console.log(taskEditDiv,"taskEditDiv")
-                   })
+  card.className = 'task-cards';
+  card.textContent = task;
+   
+  
+   card.addEventListener('mouseover',createPannel)
+   function createPannel() {
+    card.draggable = true;
+   card.style.opacity ='.5'
+    card.innerHTML = `<div class="pannel">
+            <button class="card-edit">✎ Edit</button>
+            <button class="card-close">✖ Close</button>
+        </div>`;
+   
+       card.addEventListener('dragstart',dragstart(card))
+        card.addEventListener('dragend', () => {
+        card.classList.remove('dragging');
+    });
+//  card.style.display.;
+// card.innerHTML =`<div class="pannel"><button class="card-edit">edit</button>
+//                    <button class ="card-close">close</button></div>`;
+
+// const cardEdit = document.querySelector('.card-edit')
+
+//                    cardEdit.addEventListener('click',(e)=>{
+//                     taskModel.style.display = 'flex'
+//                    const taskEditDiv = taskModel.querySelector(`.modal-content[h3]`);
+//                    console.log(taskEditDiv,"taskEditDiv")Symbol,Entity Code,Result
+
+// const cardEdit = document.querySelector('.card-edit');
+
+//        cardEdit.addEventListener('click', (e) => {
+//         console.log(e.target)
+//           taskModel.style.display = 'flex';
+//            taskOptionsCreation();
+//        });
+//                    })
 
 }
+card.addEventListener('mouseout',(e) =>{
+  const nonePannel = document.querySelector('.pannel');
+  nonePannel.style.display = 'none'
+  card.style.opacity ='1'
+})
+
+    
+  return card;
+  //
+  // card.addEventListener('mouseover',createPannel)
+  // // card.innerHTML =`<div><div class="pannel"><button class="card-edit">edit</button>
+  // //                  <button class ="card-close">close</button></div></div>`
+  //  card.addEventListener('dragstart',dragstart)
+    
+}
+
+
 
 function updateTaskLocation() { 
 }
 
-function dragstart(e) { 
+function dragstart(e,card) { 
+  e.dataTransfer.setData('text/plain',e.target.id);
+  card.classList.add('dragging');
 }
 
 
+
 function close(){
+  console.log('runing close...')
     taskModel.style.display = 'none';
     mainSection.removeAttribute('inert');
     mainSection.style.opacity = '1';
