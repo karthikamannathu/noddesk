@@ -95,8 +95,15 @@ justify-content:space-between;
     height: 80px;
     background-color: rgb(29, 29, 177);
     border-radius: 15px;
+   padding-left: 25px;
+   text-align: justify;
+   padding-top: 10px;
 }
+
 .pannel{
+    align-self:self-start;
    float: right;
-  
+   gap: 8px;
+   padding-right: 5px;
+  background-color: aqua;
 }

@@ -8,11 +8,12 @@ const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
 const selectElement  = document.querySelector('#task-options');
 const allSwimlanes = document.querySelectorAll('#swimlane-task ')
-const cardEdit = document.querySelector('.card-edit');
+
  
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
 let selectedTask = '';
+  let cloumn = '';
 
  
  addNewTask ();
@@ -27,7 +28,6 @@ function addNewTask (){
   if(selectedTask){
       // enable the task submit Model-div
            taskModel.style.display ='flex';
-          
              mainSection.setAttribute('inert','');
              mainSection.style.opacity = '.5';
              mainSection.style.color = 'rgb(18, 18, 18)';
@@ -102,12 +102,13 @@ async function runderBoard(task){
   try {
     // console.log(task,"runderBoard task")
     const swimlane = document.querySelector(`.swimlane-task.${task.toLowerCase()}`);
-    let cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
+    cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
     // console.log("runderBord loading..." ,cloumn)
   //  console.log(createTaskCard(),"cloun append")
 
     if(cloumn){
-      let taskCard = createTaskCard(task);    
+      let taskCard = createTaskCard(task); 
+      cloumn.innerHTML = '';   
       cloumn.appendChild(taskCard);
       console.log(cloumn,"cloun append")
     }
@@ -121,71 +122,56 @@ async function runderBoard(task){
 }
 
 function createTaskCard(task){
-  console.log(task,"   taskData")
+ 
 const card = document.createElement('div');
-  card.className = 'task-cards';
-  card.textContent = task;
-   
-  
-   card.addEventListener('mouseover',createPannel)
-   function createPannel() {
-    card.draggable = true;
-   card.style.opacity ='.5'
-    card.innerHTML = `<div class="pannel">
+ card.className = 'task-cards';
+ card.draggable = true;
+ card.id = task;
+ card.innerHTML = `${task}
+            <div class="pannel">
             <button class="card-edit">✎ Edit</button>
             <button class="card-close">✖ Close</button>
         </div>`;
    
-       card.addEventListener('dragstart',dragstart(card))
-        card.addEventListener('dragend', () => {
-        card.classList.remove('dragging');
+   card.addEventListener('dragstart', (e) => dragstart(e, card));
+  card.addEventListener('dragend', () => card.classList.remove('dragging'));
+
+    // 2. Hover Logic (Toggle display instead of overwriting innerHTML)
+    card.addEventListener('mouseenter', () => {
+        card.querySelector('.pannel').style.display = 'flex';
+        // card.style.opacity = '0.8';
+        const cardEdit = document.querySelector('.card-edit');
+        cardEdit.addEventListener('click',() => {
+           taskModel.style.display ='flex';
+       const editTitle = document.querySelector(`.title`)
+        editTitle.textContent ='Edit Task'
+     });
+
+      const cardRemove = document.querySelector('.card-close')
+      cardRemove.addEventListener('click',(e)=>{
+       
+      })
     });
-//  card.style.display.;
-// card.innerHTML =`<div class="pannel"><button class="card-edit">edit</button>
-//                    <button class ="card-close">close</button></div>`;
 
-// const cardEdit = document.querySelector('.card-edit')
+    card.addEventListener('mouseleave', () => {
+        card.querySelector('.pannel').style.display = 'none';
+        card.style.opacity = '1';
+    });
+  
 
-//                    cardEdit.addEventListener('click',(e)=>{
-//                     taskModel.style.display = 'flex'
-//                    const taskEditDiv = taskModel.querySelector(`.modal-content[h3]`);
-//                    console.log(taskEditDiv,"taskEditDiv")Symbol,Entity Code,Result
-
-// const cardEdit = document.querySelector('.card-edit');
-
-//        cardEdit.addEventListener('click', (e) => {
-//         console.log(e.target)
-//           taskModel.style.display = 'flex';
-//            taskOptionsCreation();
-//        });
-//                    })
-
-}
-card.addEventListener('mouseout',(e) =>{
-  const nonePannel = document.querySelector('.pannel');
-  nonePannel.style.display = 'none'
-  card.style.opacity ='1'
-})
-
-    
-  return card;
-  //
-  // card.addEventListener('mouseover',createPannel)
-  // // card.innerHTML =`<div><div class="pannel"><button class="card-edit">edit</button>
-  // //                  <button class ="card-close">close</button></div></div>`
-  //  card.addEventListener('dragstart',dragstart)
-    
+    return card;
 }
 
+function dragstart(e, card) { 
+    // e is now automatically passed correctly
+    e.dataTransfer.setData('text/plain', card.id);
+    card.classList.add('dragging');
+}
 
 
 function updateTaskLocation() { 
 }
 
-function dragstart(e,card) { 
-  e.dataTransfer.setData('text/plain',e.target.id);
-  card.classList.add('dragging');
-}
 
 
 
