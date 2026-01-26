@@ -8,25 +8,27 @@ const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
 const selectElement  = document.querySelector('#task-options');
 const allSwimlanes = document.querySelectorAll('#swimlane-task ')
-
+ const editTitle = document.querySelector(`.title`)
  
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
-let selectedTask = '';
-  let cloumn = '';
+let selectedTask = ''
 
  
  addNewTask ();
-saveTask.addEventListener('click',getallInputs)
+ 
+saveTask.addEventListener('click',getallInputs);
+closeModal.addEventListener('click',close);
 function addNewTask (){
   try {
     // Clicked buttonId get
     addTaskButton.forEach(btn =>
       btn.addEventListener("click",(e) =>{
-         selectedTask = e.target.id;
+       selectedTask = e.target.id;
     // console.log("buttonId",selectedTask)
   if(selectedTask){
       // enable the task submit Model-div
+       editTitle.textContent ='Add Task';
            taskModel.style.display ='flex';
              mainSection.setAttribute('inert','');
              mainSection.style.opacity = '.5';
@@ -43,7 +45,7 @@ function addNewTask (){
 function taskOptionsCreation(){
 
   //  add task category in modal- selection element
-
+      
   const  defaultOption = `${selectedTask[0].toUpperCase()}${
   selectedTask.slice(1)}`;//covert to firstletter capitlize 
     // Modify Array 
@@ -102,12 +104,12 @@ async function runderBoard(task){
   try {
     // console.log(task,"runderBoard task")
     const swimlane = document.querySelector(`.swimlane-task.${task.toLowerCase()}`);
-    cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
+   let cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
     // console.log("runderBord loading..." ,cloumn)
   //  console.log(createTaskCard(),"cloun append")
 
     if(cloumn){
-      let taskCard = createTaskCard(task); 
+      let taskCard = createTaskCard(task,swimlane); 
       cloumn.innerHTML = '';   
       cloumn.appendChild(taskCard);
       console.log(cloumn,"cloun append")
@@ -121,55 +123,86 @@ async function runderBoard(task){
     }
 }
 
-function createTaskCard(task){
+function createTaskCard(task,swimlane){
  
 const card = document.createElement('div');
  card.className = 'task-cards';
  card.draggable = true;
- card.id = task;
+ card.id = task + Date.now();
  card.innerHTML = `${task}
             <div class="pannel">
             <button class="card-edit">✎ Edit</button>
             <button class="card-close">✖ Close</button>
         </div>`;
    
-   card.addEventListener('dragstart', (e) => dragstart(e, card));
+   card.addEventListener('dragstart', (e) =>{
+    card.classList.add('dragging');
+    e.dataTransfer.setData('text/plain',card.id);
+   } );
   card.addEventListener('dragend', () => card.classList.remove('dragging'));
 
     // 2. Hover Logic (Toggle display instead of overwriting innerHTML)
-    card.addEventListener('mouseenter', () => {
+    card.addEventListener('mouseenter', (e) => {
         card.querySelector('.pannel').style.display = 'flex';
-        // card.style.opacity = '0.8';
-        const cardEdit = document.querySelector('.card-edit');
-        cardEdit.addEventListener('click',() => {
-           taskModel.style.display ='flex';
-       const editTitle = document.querySelector(`.title`)
-        editTitle.textContent ='Edit Task'
-     });
-
-      const cardRemove = document.querySelector('.card-close')
-      cardRemove.addEventListener('click',(e)=>{
+        card.style.opacity = '0.8';
        
+        //  Edit the card
+        const cardEdit = e.target.querySelector('.card-edit');
+          cardEdit.addEventListener('click',(e) => {
+           taskModel.style.display ='flex';
+        editTitle.textContent ='Edit Task';
+        saveTask.onClick = () => card.remove();
+     });
+   
+     //  close the card
+      const cardRemove =  e.target.querySelector('.card-close')
+      cardRemove.addEventListener('click',(e)=>{
+      card.remove()
       })
     });
-
+//  
+    //   
     card.addEventListener('mouseleave', () => {
         card.querySelector('.pannel').style.display = 'none';
         card.style.opacity = '1';
     });
   
-
+  console.log(card)
+  updateTaskLocation(swimlane);
     return card;
 }
 
-function dragstart(e, card) { 
-    // e is now automatically passed correctly
-    e.dataTransfer.setData('text/plain', card.id);
-    card.classList.add('dragging');
-}
+// function dragstart(e, cards) { 
+//     // e is now automatically passed correctly
+//     e.dataTransfer.setData('text/plain', cards.id);
+//     cards.classList.add('dragging');
+// }
 
 
-function updateTaskLocation() { 
+function updateTaskLocation(swimlane ) {
+
+  taskBoxCloum.forEach(zone => {
+    zone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      zone.classList.add('zone-hover');
+    });
+
+    zone.addEventListener('dragleve',() =>{
+      zone.classList.remove('zone-hover');
+    });
+
+
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.classList.remove('zone-hover');
+      const cardId = e.dataTransfer.getData('text/plain');
+      const draggingCard = document.getElementById(cardId);
+      if (draggingCard) {
+        zone.appendChild(draggingCard)
+        
+      }
+    });
+  }) ;
 }
 
 
