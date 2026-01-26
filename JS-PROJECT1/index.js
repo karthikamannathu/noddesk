@@ -145,6 +145,7 @@ const card = document.createElement('div');
     card.addEventListener('mouseenter', (e) => {
         card.querySelector('.pannel').style.display = 'flex';
         card.style.opacity = '0.8';
+        card.style.cursor = 'pointer';
        
         //  Edit the card
         const cardEdit = e.target.querySelector('.card-edit');
