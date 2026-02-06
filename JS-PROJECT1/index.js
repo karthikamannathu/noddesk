@@ -8,12 +8,15 @@ const titleId = document.querySelector('#title-input')
 const descriptionId = document.getElementById('task-description');
 const selectElement  = document.querySelector('#task-options');
 const allSwimlanes = document.querySelectorAll('#swimlane-task ')
- const editTitle = document.querySelector(`.title`)
+ const editTitle = document.querySelector(`.title`);
+ const colorPicker = document.querySelector(`#color-wheel`);
+ const colorResult= document.querySelector(`#color-result`);
+ const ctx = colorPicker.getContext('2d', { willReadFrequently: true });
  
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
 let selectedTask = ''
-
+ let color =''
  
  addNewTask ();
  
@@ -35,6 +38,7 @@ function addNewTask (){
              mainSection.style.color = 'rgb(18, 18, 18)';
              mainSection.style.pointerEvents = 'none';
            taskOptionsCreation();
+           pickColorWheel();
     }}) 
     );
   } catch (error) {
@@ -129,6 +133,7 @@ const card = document.createElement('div');
  card.className = 'task-cards';
  card.draggable = true;
  card.id = task + Date.now();
+ card.style.background = color;
  card.innerHTML = `${task}
             <div class="pannel">
             <button class="card-edit">✎ Edit</button>
@@ -173,11 +178,38 @@ const card = document.createElement('div');
     return card;
 }
 
-// function dragstart(e, cards) { 
-//     // e is now automatically passed correctly
-//     e.dataTransfer.setData('text/plain', cards.id);
-//     cards.classList.add('dragging');
-// }
+
+function pickColorWheel() {
+
+const radius = colorPicker.width / 2;
+// draw colour wheel
+for (let angle = 0; angle < 360; angle++) {
+
+  ctx.beginPath();
+  ctx.moveTo(radius, radius);
+
+  ctx.arc(
+    radius,
+    radius,
+    radius,
+    (angle * Math.PI) / 180,
+    ((angle + 1) * Math.PI) / 180
+  );
+
+ // fiil the color
+  ctx.fillStyle = `hsl(${angle}, 100%, 50%)`;
+  ctx.fill();
+ ctx.closePath();
+}
+colorPicker.addEventListener('click',(e) => {
+ const pixel = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+ //takes pixels formate
+  color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+  colorResult.style.background = color;
+})
+
+}
+
 
 
 function updateTaskLocation(swimlane ) {
