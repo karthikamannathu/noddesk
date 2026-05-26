@@ -90,6 +90,46 @@ justify-content:space-between;
     margin: 15px;
 }
 
+#color-box{
+   cursor: pointer;
+   background-color: #fdfcfc;
+   width: 60px;
+   height: 40px;
+}
+
+.color-picker{
+    display: none;
+    width:150px;
+    height: 220px;
+    top: 30%;
+
+    border-radius: 20px;
+    background: #000;
+    object-fit: contain;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+}
+
+#color-wheel{
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#color-result{
+  
+   height: 30px;
+   width: 120px; 
+ justify-self: right;
+  
+}
+
+#task-description{
+    max-height: 60px;
+    max-width: 180px;
+
+}
+
 .task-cards{
     margin: 5px;
     width: auto;
@@ -109,14 +149,3 @@ justify-content:space-between;
   background-color: aqua;
 }
 
-#color-wheel{
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-#color-result{
-    float: right;
-   height: 80px;
-   width: 120px; 
-  
-}

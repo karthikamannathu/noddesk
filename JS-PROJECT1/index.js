@@ -9,14 +9,18 @@ const descriptionId = document.getElementById('task-description');
 const selectElement  = document.querySelector('#task-options');
 const allSwimlanes = document.querySelectorAll('#swimlane-task ')
  const editTitle = document.querySelector(`.title`);
- const colorPicker = document.querySelector(`#color-wheel`);
- const colorResult= document.querySelector(`#color-result`);
- const ctx = colorPicker.getContext('2d', { willReadFrequently: true });
+//  const colorPicker = document.querySelector(`#color-wheel`);
+ 
+//  const colorResult= document.querySelector(`#color-result`);
+ const colorBox = document.querySelector(`#color-box`);
+ const colorPannel = document.querySelector(`.color-picker`);
+//  const ctx = colorPicker.getContext('2d', { willReadFrequently: true });
  
 let taskArray = ["Critical","Issuse-tickets","Maintenance","Unplaned"]
 let storeKey = 'UserTask';
 let selectedTask = ''
- let color =''
+ let color ='';
+ let colorPicker;
  
  addNewTask ();
  
@@ -38,14 +42,13 @@ function addNewTask (){
              mainSection.style.color = 'rgb(18, 18, 18)';
              mainSection.style.pointerEvents = 'none';
            taskOptionsCreation();
-           pickColorWheel();
-    }}) 
+ }}) 
     );
   } catch (error) {
     console.error
   }
 }
-
+colorBox.addEventListener('click', pickColorWheel);
 function taskOptionsCreation(){
 
   //  add task category in modal- selection element
@@ -76,8 +79,10 @@ async function getallInputs(){
       taskCategoryInput =  e.target.value;
     return taskCategoryInput
   });
+  let taskTitleInput = await titleId.value
   
-     saveState( taskCategoryInput )
+     saveState( taskCategoryInput);
+     saveState(taskTitleInput)
 
    } catch(error){
       console.error
@@ -89,7 +94,7 @@ async function getallInputs(){
 function saveState(CategoryInput){
 // console.log('runing savestate...')
 close();
-localStorage.setItem('task',JSON.stringify(CategoryInput))
+localStorage.setItem('task',JSON.stringify(CategoryInput));
 loadState()
 }
 
@@ -157,7 +162,8 @@ const card = document.createElement('div');
           cardEdit.addEventListener('click',(e) => {
            taskModel.style.display ='flex';
         editTitle.textContent ='Edit Task';
-        saveTask.onClick = () => card.remove();
+        saveTask.addEventListener('click',(e)=>{
+           card.remove(); });
      });
    
      //  close the card
@@ -180,35 +186,42 @@ const card = document.createElement('div');
 
 
 function pickColorWheel() {
+ colorPannel.style.display = 'flex';
+if (colorPicker) return;
 
-const radius = colorPicker.width / 2;
-// draw colour wheel
-for (let angle = 0; angle < 360; angle++) {
+  colorPicker = new iro.ColorPicker("#picker", {
+    width: 130,
+    layout: [
+      {
+        component: iro.ui.Wheel
+      },
+      {
+        component: iro.ui.Slider,
+        options: {
+          sliderType: "value"
+        }
+      }
+    ]
+  });
 
-  ctx.beginPath();
-  ctx.moveTo(radius, radius);
+  // live color preview
+  colorPicker.on("color:change", (color) => {
+    colorBox.style.background = color.hexString;
+  });
+  // close after user finished selecting
+  colorPicker.on("input:end", () => {
+    colorPannel.style.display = 'none';
+  }); 
+ 
 
-  ctx.arc(
-    radius,
-    radius,
-    radius,
-    (angle * Math.PI) / 180,
-    ((angle + 1) * Math.PI) / 180
-  );
 
- // fiil the color
-  ctx.fillStyle = `hsl(${angle}, 100%, 50%)`;
-  ctx.fill();
- ctx.closePath();
-}
-colorPicker.addEventListener('click',(e) => {
- const pixel = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
- //takes pixels formate
-  color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-  colorResult.style.background = color;
-})
+};
 
-}
+
+
+
+
+
 
 
 
@@ -250,226 +263,5 @@ function close(){
      
 }
 
+// drop cards time current card was remove
 
-
-// addTask()
-
-// function addTask (){
-// try {
-//        addTaskButton.forEach(  button => {
-//      button.addEventListener('click', (e) =>{
-//        console.log('add button click')
-//          let buttonId = e.target.id;
-//         //  console.log(e.target,'e.target')
-//         //  taskModel.dataset.activeCategory = await categoryId;
-         
-        
-        
-//         if  (buttonId ) {
-//              taskModel.style.display = 'flex';
-//              mainSection.setAttribute('inert','');
-//              mainSection.style.opacity = '.4';
-//              mainSection.style.pointerEvents = 'none';
-
-//              taskCategoryDefaultSet(buttonId);
-             
-//             // console.log( 'buttonId',buttonId)
-//              saveTask.addEventListener('click',saveTaskClick)
-//             // closeModal.addEventListener('click',closeClick)
-//             // taskOptionsInputs.addEventListener('click',taskOptionClick)
-//         } })
-//     });
-    
-//    } catch (error) {
-//     console.log(error)};
-
-//    }
-
-
-// function taskCategoryDefaultSet(btnId){
-//   // ckeck array include the current btn task
-//   try {
-//    const filterArray = taskArray.filter(value => value.toLowerCase() != btnId)
-//    console.log( filterArray,"filterArray")
-//   const defaulTask = `${btnId[0].toUpperCase()}${btnId.slice(1)}`;//convert the id first letter uppercase
-//  filterArray.unshift(defaulTask);
-//  const taskOptions = document.createElement('option');
-// // append  selection options
-//     filterArray.map (data  =>{
-     
-//        taskOptions.textContent = data;
-//       taskOptions.value = data;
-//       selectTagId.appendChild(taskOptions)
-//       });
-
-
-
-
-    
-//   } catch (error) {
-//   console.log(error)
-//   }}
-
-
-
-
-
-// async function saveTaskClick(){
-//  try {
-//   // category selection input
-//    let selectInput = await selectTagId.value;
-//     if (selectInput === ''){
-//     console.log('selected is empty')
-//     }
-//      selectTagId.addEventListener('change',e =>
-//       selectInput =  e.target.value 
-//      );
-
-// // title input get
-
-
-// saveState(selectInput)
-// loadState()
-// // console.log(saveState,'saveState')
-// // console.log(loadState(),'loadState')
-
-
-//     } catch (error) {
-//       console.error
-//     } 
-    
-//     }
-
-// function saveState(selectInput){
-//  console.log('saveState is loding');
-//  localStorage.setItem('task',JSON.stringify(selectInput));
-
-// //  localStorage.setItem('title',JSON.stringify(titleInput));
-// //  localStorage.setItem('description',JSON.stringify(descInput));
-
-// //  localStorage.removeItem('Task');
-
-// }
-
-// async function loadState(){
-//   try{
-//       console.log('loadState loading');
-//     const taskName = await JSON.parse(localStorage.getItem('task'));
-
-//   if(taskName) {
-// console.log('taskName');
-//   runderBoard(taskName);
-
-//   }
-//   else{
-
-//   }
-
-// }catch(error){
-// console.error
-// }
-// }
-
-//  function runderBoard(taskName) {
-//   // get  All input boxs classNames
-
-// // find the taks store key equal, className  using element
-// const filtertag =[...taskBoxContainer].filter(element =>
-//   element.classList.contains((taskName).toLowerCase()
-// ));
- 
-// // select to-do first colum
-// const allChidern = filtertag.flatMap(parent =>
-//   Array.from(parent.querySelectorAll('.task-cloum')))
-// console.log(allChidern,"all chidern")
-// let taskCard  = createTaskCard(taskName);
-// console.log(taskCard,"taskCard")
-//   allChidern[0].appendChild(taskCard) //create task cards
-
-
-
-// close(); }
-
-// 
-
-
-
-
-
-
-
-// function updateTaskLocation(){
-
-// }
-
-
-
-
-// async function taskOptionSet(e) {
-    
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// select to-do first colum
-  // filtertag.forEach( cloums =>{
-  // let todoColumn = cloums.querySelector(".task-cloum[data-status = 'to-do']");
-
-
-
-
-
-
-
-
-
-
-// const firstOptions = document.createElement('option')
-// const currentTask = taskArray.filter(value => value.toLowerCase().includes( btnId.toLowerCase() ) //check btn id equal element in task Array
-// )
-// firstOptions.textContent =  currentTask;
-// firstOptions.value = currentTask;
-// firstOptions.id = currentTask;
-//  selectTagId.appendChild(firstOptions);
-
-
-// const arrayIndex = taskArray.indexOf(String(currentTask))
-//         taskArray.splice(arrayIndex,1);  //task Array iteration
-
-// //append nest optons list
-//  taskArray.map(value => {
-//     const nextOptions = document.createElement('option');
-//     nextOptions.textContent = value;
-//     nextOptions.value = value;
-   
-//     selectTagId.appendChild(nextOptions)
-   
-    
-// })
-
-// emptyArray = btnId
- 
-// // console.log(btnId)
-//  console.log(emptyArray,"optionId0")
-
-// selectTagId.addEventListener('change',taskChange);
-
-// async function taskChange(e) {
-   
-//   const optionId =  e.target.value; 
- 
-// console.log(emptyArray ,'optionId 2');    
-// }  
- 
-//   console.log(emptyArray,"optionId1")
