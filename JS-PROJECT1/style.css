@@ -142,10 +142,12 @@ justify-content:space-between;
 }
 
 .pannel{
+    display: none;
     align-self:self-start;
    float: right;
    gap: 8px;
+   border-radius: 2px;
    padding-right: 5px;
-  background-color: aqua;
+ 
 }
 

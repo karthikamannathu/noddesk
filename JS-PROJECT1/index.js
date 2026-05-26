@@ -42,6 +42,8 @@ function addNewTask() {
           mainSection.style.opacity = ".5";
           mainSection.style.color = "rgb(18, 18, 18)";
           mainSection.style.pointerEvents = "none";
+          titleId.value= '';
+          taskDeskId.value = '';
           taskOptionsCreation();
         }
       }),
@@ -92,8 +94,11 @@ async function getallInputs() {
       taskDescInput = e.target.value;
       return taskDescInput;
     });
-
-    saveState(taskCategoryInput, taskTitleInput,taskDescInput);
+if(taskCategoryInput&&taskTitleInput&&taskDescInput === 'null'){
+  alert("fill all")
+}
+   else{ saveState(taskCategoryInput, taskTitleInput,taskDescInput)};
+   
   } catch (error) {
     console.error;
   }
