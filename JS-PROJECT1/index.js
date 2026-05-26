@@ -73,16 +73,20 @@ function taskOptionsCreation(){
 
 async function getallInputs(){
  try{ 
-  // get taskCategory Inputs
+  // get Inputs
   let taskCategoryInput = await selectElement.value;
   selectElement.addEventListener('change',e =>{
       taskCategoryInput =  e.target.value;
     return taskCategoryInput
   });
-  let taskTitleInput = await titleId.value
+  let taskTitleInput = await titleId.value;
+  titleId.addEventListener('change',e =>{
+    taskTitleInput =  e.target.value;
+  return taskTitleInput;
+});
   
-     saveState( taskCategoryInput);
-     saveState(taskTitleInput)
+ saveState(taskCategoryInput,taskTitleInput);
+     
 
    } catch(error){
       console.error
@@ -91,37 +95,40 @@ async function getallInputs(){
 }
 //  add task button click time remove the option/doument
 
-function saveState(CategoryInput){
-// console.log('runing savestate...')
+function saveState(CategoryInput,titleInput){
+console.log('runing savestate...')
+
+localStorage.setItem('taskCate',JSON.stringify(CategoryInput));
+localStorage.setItem('taskTitle',JSON.stringify(titleInput));
 close();
-localStorage.setItem('task',JSON.stringify(CategoryInput));
 loadState()
 }
 
  
 
 function loadState() {
- const taskCategory = JSON.parse(localStorage.getItem('task'));
+ const taskCategory = JSON.parse(localStorage.getItem('taskCate'));
+ const taskTitle= JSON.parse(localStorage.getItem('taskTitle'));
   //  console.log( taskCategory," taskCategory");
-//  console.log("loadState loading...",JSON.parse(localStorage.getItem('task')));
- runderBoard(taskCategory);
+//  console.log("loadState loading...",JSON.parse(localStorage.getItem('taskCate')));
+ runderBoard(taskCategory,taskTitle);
 //  close();
 }
 
 // find current swimlane and colum
-async function runderBoard(task){
+async function runderBoard(task,name){
   try {
-    // console.log(task,"runderBoard task")
+    //  console.log(task,"runderBoard task")
     const swimlane = document.querySelector(`.swimlane-task.${task.toLowerCase()}`);
    let cloumn = swimlane.querySelector(`.task-cloum[data-status = to-do`);
     // console.log("runderBord loading..." ,cloumn)
   //  console.log(createTaskCard(),"cloun append")
 
     if(cloumn){
-      let taskCard = createTaskCard(task,swimlane); 
+      let taskCard = createTaskCard(name,swimlane); 
       cloumn.innerHTML = '';   
       cloumn.appendChild(taskCard);
-      console.log(cloumn,"cloun append")
+      // console.log(cloumn,"cloun append")
     }
 
 
@@ -132,14 +139,14 @@ async function runderBoard(task){
     }
 }
 
-function createTaskCard(task,swimlane){
+function createTaskCard(name,swimlane){
  
 const card = document.createElement('div');
  card.className = 'task-cards';
  card.draggable = true;
- card.id = task + Date.now();
+ card.id = name + Date.now();
  card.style.background = color;
- card.innerHTML = `${task}
+ card.innerHTML = `${name}
             <div class="pannel">
             <button class="card-edit">✎ Edit</button>
             <button class="card-close">✖ Close</button>
@@ -210,6 +217,7 @@ if (colorPicker) return;
   });
   // close after user finished selecting
   colorPicker.on("input:end", () => {
+    color = colorBox.style.background 
     colorPannel.style.display = 'none';
   }); 
  
