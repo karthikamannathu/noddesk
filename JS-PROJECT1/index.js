@@ -5,14 +5,10 @@ const mainSection = document.querySelector("#main");
 const saveTask = document.querySelector("#save-task");
 const closeModal = document.querySelector("#close-modal");
 const titleId = document.querySelector("#title-input");
-const descriptionId = document.getElementById("task-description");
 const selectElement = document.querySelector("#task-options");
-const allSwimlanes = document.querySelectorAll("#swimlane-task ");
 const editTitle = document.querySelector(`.title`);
-const taskDeskId = document.querySelector(`#task-description`);
-//  const colorPicker = document.querySelector(`#color-wheel`);
+const descId = document.querySelector(`#task-description`);
 
-//  const colorResult= document.querySelector(`#color-result`);
 const colorBox = document.querySelector(`#color-box`);
 const colorPannel = document.querySelector(`.color-picker`);
 //  const ctx = colorPicker.getContext('2d', { willReadFrequently: true });
@@ -27,23 +23,26 @@ addNewTask();
 
 saveTask.addEventListener("click", getallInputs);
 closeModal.addEventListener("click", close);
+
+// new task add function
 function addNewTask() {
   try {
     // Clicked buttonId get
     addTaskButton.forEach((btn) =>
       btn.addEventListener("click", (e) => {
         selectedTask = e.target.id;
-        // console.log("buttonId",selectedTask)
+
         if (selectedTask) {
           // enable the task submit Model-div
-          editTitle.textContent = "Add Task";
+          editTitle.textContent = "Add Task"; //after edit change the title
+          saveTask.textContent = "Add Task"; //after edit change the btn context
           taskModel.style.display = "flex";
           mainSection.setAttribute("inert", "");
           mainSection.style.opacity = ".5";
           mainSection.style.color = "rgb(18, 18, 18)";
           mainSection.style.pointerEvents = "none";
-          titleId.value= '';
-          taskDeskId.value = '';
+          titleId.value = "";
+          descId.value = "";
           taskOptionsCreation();
         }
       }),
@@ -52,7 +51,9 @@ function addNewTask() {
     console.error;
   }
 }
-colorBox.addEventListener("click", pickColorWheel);
+colorBox.addEventListener("click", pickColorWheel); ///color picker fun
+
+//task options defult set
 function taskOptionsCreation() {
   //  add task category in modal- selection element
 
@@ -89,23 +90,24 @@ async function getallInputs() {
       taskTitleInput = e.target.value;
       return taskTitleInput;
     });
-      let taskDescInput = await taskDeskId.value;
+    let taskDescInput = awaitdescId.value;
     titleId.addEventListener("change", (e) => {
       taskDescInput = e.target.value;
       return taskDescInput;
     });
-if(taskCategoryInput&&taskTitleInput&&taskDescInput === 'null'){
-  alert("fill all")
-}
-   else{ saveState(taskCategoryInput, taskTitleInput,taskDescInput)};
-   
+    if (taskCategoryInput && taskTitleInput && taskDescInput === "null") {
+      alert("fill all");
+    } else {
+      saveState(taskCategoryInput, taskTitleInput, taskDescInput);
+    }
   } catch (error) {
     console.error;
   }
 }
-//  add task button click time remove the option/doument
 
-function saveState(CategoryInput, titleInput,descInput) {
+
+// ̣input are store the localstorege
+function saveState(CategoryInput, titleInput, descInput) {
   console.log("runing savestate...");
 
   localStorage.setItem("taskCate", JSON.stringify(CategoryInput));
@@ -115,18 +117,18 @@ function saveState(CategoryInput, titleInput,descInput) {
   loadState();
 }
 
+
+// get the data
 function loadState() {
   const taskCategory = JSON.parse(localStorage.getItem("taskCate"));
   const taskTitle = JSON.parse(localStorage.getItem("taskTitle"));
   const taskDesc = JSON.parse(localStorage.getItem("taskDesc"));
-  //  console.log( taskCategory," taskCategory");
-  //  console.log("loadState loading...",JSON.parse(localStorage.getItem('taskCate')));
-  runderBoard(taskCategory, taskTitle,taskDesc);
+  runderBoard(taskCategory, taskTitle, taskDesc);
   //  close();
 }
 
 // find current swimlane and colum
-async function runderBoard(task,name,desc) {
+async function runderBoard(task, name, desc) {
   try {
     //  console.log(task,"runderBoard task")
     const swimlane = document.querySelector(
@@ -137,7 +139,7 @@ async function runderBoard(task,name,desc) {
     //  console.log(createTaskCard(),"cloun append")
 
     if (cloumn) {
-      let taskCard = createTaskCard(name,swimlane,desc);
+      let taskCard = createTaskCard(name, swimlane, desc);
       cloumn.innerHTML = "";
       cloumn.appendChild(taskCard);
       // console.log(cloumn,"cloun append")
@@ -147,17 +149,20 @@ async function runderBoard(task,name,desc) {
   }
 }
 
-function createTaskCard(name,swimlane,desc) {
+
+//To  create the taskCards and also give the drags and drop
+function createTaskCard(name, swimlane, desc) {
   const card = document.createElement("div");
   card.className = "task-cards";
   card.draggable = true;
   card.id = name + Date.now();
   card.style.background = color;
-  card.innerHTML = `<h3>${name}</h3>\n\t
+  card.innerHTML = `<h3>${name}</h3>
+              <p> ${desc}</p>
             <div class="pannel">
             <button class="card-edit">✎ Edit</button>
             <button class="card-close">✖ Close</button>
-        </div><p> ${desc}</p>`;
+        </div>`;
 
   card.addEventListener("dragstart", (e) => {
     card.classList.add("dragging");
@@ -165,7 +170,7 @@ function createTaskCard(name,swimlane,desc) {
   });
   card.addEventListener("dragend", () => card.classList.remove("dragging"));
 
-  // 2. Hover Logic (Toggle display instead of overwriting innerHTML)
+  //  Hover Logic (Toggle display instead of overwriting innerHTML)
   card.addEventListener("mouseenter", (e) => {
     card.querySelector(".pannel").style.display = "flex";
     card.style.opacity = "0.8";
@@ -176,6 +181,8 @@ function createTaskCard(name,swimlane,desc) {
     cardEdit.addEventListener("click", (e) => {
       taskModel.style.display = "flex";
       editTitle.textContent = "Edit Task";
+      saveTask.textContent = "Save Changes";
+
       saveTask.addEventListener("click", (e) => {
         card.remove();
       });
@@ -187,8 +194,7 @@ function createTaskCard(name,swimlane,desc) {
       card.remove();
     });
   });
-  //
-  //
+  
   card.addEventListener("mouseleave", () => {
     card.querySelector(".pannel").style.display = "none";
     card.style.opacity = "1";
@@ -224,10 +230,12 @@ function pickColorWheel() {
   });
   // close after user finished selecting
   colorPicker.on("input:end", () => {
-  color = colorBox.style.background;
+    color = colorBox.style.background;
     colorPannel.style.display = "none";
   });
 }
+
+
 
 function updateTaskLocation(swimlane) {
   taskBoxCloum.forEach((zone) => {
